@@ -178,6 +178,7 @@ texture = ExtResource("1_ig7tw")
 0:5/0/terrains_peering_bit/top_right_corner = 1
 
 [sub_resource type="TileSet" id="TileSet_h2yge"]
+occlusion_layer_0/light_mask = 1
 physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Platforms_Blue"
@@ -197,7 +198,7 @@ tile_map_data = PackedByteArray("AAAFAAEAAAAAAAQAAAAFAAUAAAAAAAQAAAAGAAEAAAAAAAQ
 tile_set = SubResource("TileSet_h2yge")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(34, -146)
+position = Vector2(-66, -116)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("RectangleShape2D_0xm2m")
@@ -206,5 +207,6 @@ shape = SubResource("RectangleShape2D_0xm2m")
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("2_0xm2m")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.75, 1.75)
+[node name="Camera2D" type="Camera2D" parent="RigidBody2D"]
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true
