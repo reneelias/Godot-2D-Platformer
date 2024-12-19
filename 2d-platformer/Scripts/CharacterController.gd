@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name CharacterController
 
 @export var gravityScale := 9.81
 @export var moveSpeed := 5.0

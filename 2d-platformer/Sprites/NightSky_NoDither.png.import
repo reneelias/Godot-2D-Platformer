@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ds06l1jfhigal"
-path="res://.godot/imported/Tiles.png-825b95a5145508fffe81ba0fc1c92c0b.ctex"
+uid="uid://d362ldpb1x223"
+path="res://.godot/imported/NightSky_NoDither.png-6c2a9a7502cb72f90026bf200171cac3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tiles.png"
-dest_files=["res://.godot/imported/Tiles.png-825b95a5145508fffe81ba0fc1c92c0b.ctex"]
+source_file="res://Sprites/NightSky_NoDither.png"
+dest_files=["res://.godot/imported/NightSky_NoDither.png-6c2a9a7502cb72f90026bf200171cac3.ctex"]
 
 [params]
 
