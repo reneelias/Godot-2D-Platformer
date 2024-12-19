@@ -214,7 +214,7 @@ tile_set = SubResource("TileSet_h2yge")
 position = Vector2(-59, -121)
 script = ExtResource("2_h2yge")
 moveSpeed = 10.0
-jumpSpeed = 250
+jumpSpeed = 275
 friction = 0.075
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
