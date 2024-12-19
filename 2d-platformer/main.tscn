@@ -273,12 +273,14 @@ fill_from = Vector2(0.5, 0.5)
 [node name="Node2D" type="Node2D"]
 
 [node name="NightSkyNoDither" type="Sprite2D" parent="."]
+z_index = -200
 texture_filter = 1
 position = Vector2(-59, -118)
 texture = ExtResource("1_lquwl")
 
 [node name="NightSky" type="Sprite2D" parent="."]
 visible = false
+z_index = -200
 texture_filter = 1
 position = Vector2(-58, -119)
 texture = ExtResource("1_1bvp3")
@@ -291,7 +293,9 @@ tile_set = SubResource("TileSet_h2yge")
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(-156, -223)
 script = ExtResource("5_7mycd")
+moveSpeed = 10.0
 jumpSpeed = 275
+friction = 0.075
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_0xm2m")
@@ -304,7 +308,8 @@ texture = SubResource("CanvasTexture_0xm2m")
 zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
-[node name="CharacterBody2D#RigidBody2D#PointLight2D" type="PointLight2D" parent="Player"]
+[node name="PlayerLight" type="PointLight2D" parent="Player"]
+range_z_min = -50
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 0.988235)
 texture = SubResource("GradientTexture2D_h2yge")
