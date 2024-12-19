@@ -11,6 +11,9 @@ func _ready():
     startPos = global_position
 
 func _physics_process(delta):
+    movement()
+
+func movement():
     velocity += Vector2(0, gravityScale)
 
     var moveSpeedVec := Vector2(moveSpeed, 0)
