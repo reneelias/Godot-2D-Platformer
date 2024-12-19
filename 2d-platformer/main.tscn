@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=4 uid="uid://b4do5snoudr7g"]
+[gd_scene load_steps=20 format=4 uid="uid://b4do5snoudr7g"]
 
 [ext_resource type="Texture2D" uid="uid://dfwadawauebbi" path="res://NightSky.png" id="1_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://ds06l1jfhigal" path="res://Tiles.png" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://d362ldpb1x223" path="res://NightSky_NoDither.png" id="1_lquwl"]
 [ext_resource type="Texture2D" uid="uid://bbxasgo6d7wqq" path="res://icon.svg" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://cwfmjvsms7q7l" path="res://Tiles_NormalMap.png" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://c71maiyhaww64" path="res://CharacterController.gd" id="5_7mycd"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_h2yge"]
 tile_data = PackedInt32Array(0, 262145, 0, 65536, 131073, 1610612736, 131072, 131073, 1610612736, 196608, 262145, 1, 1, 131073, 0, 196609, 131073, 0, 2, 131073, 0, 196610, 131073, 0, 3, 131073, 0, 196611, 131073, 0, 4, 327681, 0, 65540, 131073, 1610612736, 131076, 131073, 1610612736, 196612, 327681, 1)
@@ -289,6 +290,8 @@ tile_set = SubResource("TileSet_h2yge")
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(-156, -223)
+script = ExtResource("5_7mycd")
+jumpSpeed = 275
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_0xm2m")
