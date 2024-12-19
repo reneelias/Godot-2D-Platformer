@@ -191,9 +191,12 @@ sources/0 = SubResource("TileSetAtlasSource_0xm2m")
 
 [node name="Node2D" type="Node2D"]
 
-[node name="NightSkyNoDither" type="Sprite2D" parent="."]
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.1, 0.1)
+scroll_offset = Vector2(512, 256)
+
+[node name="NightSkyNoDither" type="Sprite2D" parent="Parallax2D"]
 texture_filter = 1
-position = Vector2(-59, -118)
 texture = ExtResource("1_kry3j")
 
 [node name="NightSky" type="Sprite2D" parent="."]
@@ -209,3 +212,5 @@ tile_set = SubResource("TileSet_h2yge")
 
 [node name="Player" parent="." instance=ExtResource("4_jjvhh")]
 position = Vector2(-59, -121)
+
+[editable path="Player"]
