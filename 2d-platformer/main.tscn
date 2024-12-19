@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=4 uid="uid://b4do5snoudr7g"]
+[gd_scene load_steps=9 format=4 uid="uid://b4do5snoudr7g"]
 
+[ext_resource type="Texture2D" uid="uid://dfwadawauebbi" path="res://NightSky.png" id="1_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://ds06l1jfhigal" path="res://Tiles.png" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://d362ldpb1x223" path="res://NightSky_NoDither.png" id="1_lquwl"]
 [ext_resource type="Texture2D" uid="uid://bbxasgo6d7wqq" path="res://icon.svg" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://c71maiyhaww64" path="res://CharacterController.gd" id="2_h2yge"]
 
@@ -189,9 +191,19 @@ terrain_set_0/terrain_1/color = Color(0.215532, 0.625173, 0.470582, 1)
 sources/0 = SubResource("TileSetAtlasSource_0xm2m")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
-size = Vector2(16, 16)
+size = Vector2(15, 15)
 
 [node name="Node2D" type="Node2D"]
+
+[node name="NightSkyNoDither" type="Sprite2D" parent="."]
+position = Vector2(-59, -118)
+texture = ExtResource("1_lquwl")
+
+[node name="NightSky" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(-58, -119)
+texture = ExtResource("1_1bvp3")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 texture_filter = 1
