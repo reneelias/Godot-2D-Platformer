@@ -7,6 +7,7 @@ class_name CharacterController
 @export var friction := .025
 @export var inAirDamp := .5
 @export var jumpSpeedFrames := 10
+@export var maxVelX = 250 
 var jumpSpeedFramesCount := 0
 var startPos : Vector2
 
@@ -39,8 +40,12 @@ func movement():
     if is_on_floor():
         velocity -= Vector2(velocity.x * friction, 0)
 
+    if abs(velocity.x) > maxVelX:
+        velocity.x = maxVelX if velocity.x > 0 else -maxVelX
+
     if Input.is_key_pressed(KEY_R):
         global_position = startPos
         velocity = Vector2.ZERO
         
+    print(velocity)
     move_and_slide()

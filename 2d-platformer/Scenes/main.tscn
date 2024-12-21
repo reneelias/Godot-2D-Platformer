@@ -212,9 +212,12 @@ tile_set = SubResource("TileSet_h2yge")
 
 [node name="Player" parent="." instance=ExtResource("4_jjvhh")]
 position = Vector2(-59, -121)
+moveSpeed = 12.0
 jumpSpeed = 75
+friction = 0.07
 inAirDamp = 0.8
 jumpSpeedFrames = 15
+maxVelX = 200
 jumpSpeedScaler = 0.375
 
 [editable path="Player"]
