@@ -23,12 +23,21 @@ func _physics_process(delta):
 
 func movement():
     velocity += Vector2(0, gravityScale)
+    var inputVelocity := Vector2.ZERO
 
     var moveSpeedVec := Vector2(moveSpeed, 0)
     if Input.is_key_pressed(KEY_A):
-        velocity -= moveSpeedVec * (inAirDamp if (not is_on_floor()) else 1.0)
+        inputVelocity -= moveSpeedVec * (inAirDamp if (not is_on_floor()) else 1.0)
     if Input.is_key_pressed(KEY_D):
-        velocity += moveSpeedVec * (inAirDamp if (not is_on_floor()) else 1.0)
+        inputVelocity += moveSpeedVec * (inAirDamp if (not is_on_floor()) else 1.0)
+        
+    if is_on_floor() and inputVelocity.length() == 0:
+        velocity -= Vector2(velocity.x * friction, 0)
+    
+    velocity += inputVelocity
+    if abs(velocity.x) > maxVelX:
+        velocity.x = maxVelX if velocity.x > 0 else -maxVelX
+    
     if Input.is_key_pressed(KEY_SPACE):
         if is_on_floor():
             jumpSpeedFramesCount = 0
@@ -37,15 +46,8 @@ func movement():
             jumpSpeedFramesCount += 1
             velocity -= Vector2(0, jumpSpeed * jumpSpeedScaler * cos(float(jumpSpeedFramesCount)/jumpSpeedFrames * PI/2))
             
-    if is_on_floor():
-        velocity -= Vector2(velocity.x * friction, 0)
-
-    if abs(velocity.x) > maxVelX:
-        velocity.x = maxVelX if velocity.x > 0 else -maxVelX
-
     if Input.is_key_pressed(KEY_R):
         global_position = startPos
         velocity = Vector2.ZERO
-        
-    print(velocity)
+    
     move_and_slide()
