@@ -1,6 +1,10 @@
 extends CharacterBody2D
 class_name CharacterController
 
+@export_group("References")
+@export var animSprite : AnimatedSprite2D
+
+@export_category("Physics")
 @export var gravityScale := 9.81
 @export var moveSpeed := 5.0
 @export var jumpSpeed := 100
@@ -37,6 +41,9 @@ func movement():
     velocity += inputVelocity
     if abs(velocity.x) > maxVelX:
         velocity.x = maxVelX if velocity.x > 0 else -maxVelX
+    
+    if inputVelocity.x != 0:
+        animSprite.flip_h = inputVelocity.x < 0
     
     if Input.is_key_pressed(KEY_SPACE):
         if is_on_floor():
