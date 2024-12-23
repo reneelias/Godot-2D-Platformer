@@ -219,8 +219,3 @@ inAirDamp = 0.8
 jumpSpeedFrames = 15
 maxVelX = 150
 jumpSpeedScaler = 0.375
-
-[node name="Camera2D" parent="Player" index="2"]
-position_smoothing_enabled = false
-
-[editable path="Player"]
