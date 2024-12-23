@@ -216,6 +216,6 @@ moveSpeed = 5.0
 jumpSpeed = 75
 friction = 0.1
 inAirDamp = 0.8
-jumpSpeedFrames = 14
+jumpSpeedFrames = 13
 maxVelX = 100
 jumpSpeedScaler = 0.375

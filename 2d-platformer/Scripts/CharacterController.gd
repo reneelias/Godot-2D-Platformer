@@ -11,23 +11,43 @@ class_name CharacterController
 @export var friction := .025
 @export var inAirDamp := .5
 @export var jumpSpeedFrames := 10
-@export var maxVelX = 250 
 var jumpSpeedFramesCount := 0
+@export var maxVelX = 250 
+@export var coyoteFrames := 5
+var coyoteFramesCount := 0
 var startPos : Vector2
-
+## Used for scaling extended jump frames speed
 @export var jumpSpeedScaler := .125
 # const JUMP_SPEED_SCALER = .125
+var inputVelocity := Vector2.ZERO
 
+enum PlayerState {
+    IDLE,
+    RUN,
+    JUMP,
+    FALL
+}
+var playerState := PlayerState.IDLE
 
 func _ready():
     startPos = global_position
 
 func _physics_process(delta):
     movement()
+    updatePlayerState()
+
+func updatePlayerState():
+    if is_on_floor():
+        if inputVelocity.x != 0:
+            playerState = PlayerState.RUN
+        else:
+            playerState = PlayerState.IDLE
+    elif not is_on_floor() and velocity.y > 0:
+        playerState = PlayerState.FALL
 
 func movement():
     velocity += Vector2(0, gravityScale)
-    var inputVelocity := Vector2.ZERO
+    inputVelocity = Vector2.ZERO
 
     var moveSpeedVec := Vector2(moveSpeed, 0)
     if Input.is_key_pressed(KEY_A):
@@ -45,16 +65,25 @@ func movement():
     if inputVelocity.x != 0:
         animSprite.flip_h = inputVelocity.x < 0
     
-    if Input.is_key_pressed(KEY_SPACE):
-        if is_on_floor():
-            jumpSpeedFramesCount = 0
-            velocity -= Vector2(0, jumpSpeed)
-        elif jumpSpeedFramesCount < jumpSpeedFrames:
-            jumpSpeedFramesCount += 1
-            velocity -= Vector2(0, jumpSpeed * jumpSpeedScaler * cos(float(jumpSpeedFramesCount)/jumpSpeedFrames * PI/2))
+    updateJump()
             
     if Input.is_key_pressed(KEY_R):
         global_position = startPos
         velocity = Vector2.ZERO
     
     move_and_slide()
+
+func updateJump():
+    if is_on_floor():
+        coyoteFramesCount = 0
+    else:
+        coyoteFramesCount += 1
+
+    if Input.is_key_pressed(KEY_SPACE):
+        if is_on_floor() or (coyoteFramesCount < coyoteFrames and playerState != PlayerState.JUMP):
+            jumpSpeedFramesCount = 0
+            velocity -= Vector2(0, jumpSpeed)
+            playerState = PlayerState.JUMP
+        elif jumpSpeedFramesCount < jumpSpeedFrames:
+            jumpSpeedFramesCount += 1
+            velocity -= Vector2(0, jumpSpeed * jumpSpeedScaler * cos(float(jumpSpeedFramesCount)/jumpSpeedFrames * PI/2))
