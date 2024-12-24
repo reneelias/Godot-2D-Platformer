@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ccwmsb5ujo4ku"]
+[gd_scene load_steps=9 format=3 uid="uid://ccwmsb5ujo4ku"]
 
 [ext_resource type="Script" uid="uid://c71maiyhaww64" path="res://Scripts/CharacterController.gd" id="1_tryvm"]
 [ext_resource type="Script" uid="uid://c43q83dh0qpt7" path="res://ObjectScenes/CameraController.gd" id="3_5podq"]
@@ -19,10 +19,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0001, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0, 0, 1, 2, 3]
 }
 
 [sub_resource type="Animation" id="Animation_akhjb"]
@@ -40,9 +40,26 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_wpivi"]
+resource_name = "Jump"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 6]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wpivi"]
 _data = {
 &"Idle": SubResource("Animation_5podq"),
+&"Jump": SubResource("Animation_wpivi"),
 &"RESET": SubResource("Animation_akhjb")
 }
 
@@ -56,6 +73,7 @@ friction = 0.075
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_akhjb")
 hframes = 4
+vframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_0xm2m")

@@ -44,8 +44,10 @@ func updatePlayerState():
 	if is_on_floor():
 		if inputVelocity.x != 0:
 			playerState = PlayerState.RUN
+			animPlayer.play("Idle")
 		else:
 			playerState = PlayerState.IDLE
+			animPlayer.play("Idle")
 	elif not is_on_floor() and velocity.y > 0:
 		playerState = PlayerState.FALL
 
@@ -89,6 +91,7 @@ func updateJump():
 			jumpSpeedFrames = JUMP_FRAMES
 			velocity -= Vector2(0, jumpSpeed)
 			playerState = PlayerState.JUMP
+			animPlayer.play("Jump")
 		elif is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x:
 			jumpSpeedFramesCount = 0
 			jumpSpeedFrames = WALL_JUMP_FRAMES
@@ -97,6 +100,7 @@ func updateJump():
 			wallJumpVec.y = -abs(wallJumpVec.y)
 			velocity = wallJumpVec * wallJumpSpeed
 			playerState = PlayerState.JUMP
+			animPlayer.play("Jump")
 	elif Input.is_action_pressed("Jump") and playerState == PlayerState.JUMP and jumpSpeedFramesCount < jumpSpeedFrames:
 		jumpSpeedFramesCount += 1
 		velocity -= Vector2(0, jumpSpeed * jumpSpeedScaler * cos(float(jumpSpeedFramesCount)/jumpSpeedFrames * PI/2))
