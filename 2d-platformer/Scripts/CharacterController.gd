@@ -46,7 +46,7 @@ func updatePlayerState():
 	if is_on_floor():
 		if inputVelocity.x != 0:
 			playerState = PlayerState.RUN
-			animPlayer.play("Idle")
+			animPlayer.play("Run")
 		else:
 			playerState = PlayerState.IDLE
 			animPlayer.play("Idle")
