@@ -192,7 +192,7 @@ sources/0 = SubResource("TileSetAtlasSource_0xm2m")
 [node name="Node2D" type="Node2D"]
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.1, 0.1)
+scroll_scale = Vector2(0.025, 0.025)
 scroll_offset = Vector2(512, 256)
 
 [node name="NightSkyNoDither" type="Sprite2D" parent="Parallax2D"]
