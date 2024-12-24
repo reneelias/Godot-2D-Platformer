@@ -11,7 +11,7 @@ class_name CharacterController
 @export var friction := .025
 @export var inAirDamp := .5
 @export var jumpSpeedFrames := 10
-const JUMP_FRAMES = 13
+const JUMP_FRAMES = 9
 const WALL_JUMP_FRAMES = 6
 var jumpSpeedFramesCount := 0
 @export var maxVelX = 250 
