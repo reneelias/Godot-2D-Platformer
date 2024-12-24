@@ -8,28 +8,30 @@ class_name CharacterController
 @export_category("Physics")
 @export var gravityScale := 9.81
 @export var moveSpeed := 5.0
-@export var jumpSpeed := 100
+@export var jumpSpeed := 100.0
 @export var friction := .025
 @export var inAirDamp := .5
 @export var jumpSpeedFrames := 10
 const JUMP_FRAMES = 9
 const WALL_JUMP_FRAMES = 6
 var jumpSpeedFramesCount := 0
-@export var maxVelX = 250 
+@export var maxVelX := 250.0 
 @export var coyoteFrames := 5
 var coyoteFramesCount := 0
 var startPos : Vector2
 ## Used for scaling extended jump frames speed
 @export var jumpSpeedScaler := .125
 # const JUMP_SPEED_SCALER = .125
-@export var wallJumpSpeed := 200
+@export var wallJumpSpeed := 200.0
+@export var wallHugSpeed := 100.0
 var inputVelocity := Vector2.ZERO
 
 enum PlayerState {
 	IDLE,
 	RUN,
 	JUMP,
-	FALL
+	FALL,
+	WALLHUG
 }
 var playerState := PlayerState.IDLE
 
@@ -48,7 +50,10 @@ func updatePlayerState():
 		else:
 			playerState = PlayerState.IDLE
 			animPlayer.play("Idle")
-	elif not is_on_floor() and velocity.y > 60.0:
+	elif is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x:
+		playerState = PlayerState.WALLHUG
+		animPlayer.play("WallHug")
+	elif not is_on_floor() and velocity.y > wallHugSpeed - 1:
 		playerState = PlayerState.FALL
 		animPlayer.play("Fall")
 
@@ -72,8 +77,12 @@ func movement():
 	if inputVelocity.x != 0:
 		sprite2D.flip_h = inputVelocity.x < 0
 	
+
 	updateJump()
 			
+	if playerState == PlayerState.WALLHUG:
+		velocity.y = min(velocity.y, wallHugSpeed)
+		
 	if Input.is_key_pressed(KEY_R):
 		global_position = startPos
 		velocity = Vector2.ZERO
@@ -105,4 +114,3 @@ func updateJump():
 	elif Input.is_action_pressed("Jump") and playerState == PlayerState.JUMP and jumpSpeedFramesCount < jumpSpeedFrames:
 		jumpSpeedFramesCount += 1
 		velocity -= Vector2(0, jumpSpeed * jumpSpeedScaler * cos(float(jumpSpeedFramesCount)/jumpSpeedFrames * PI/2))
-		# print("Jump Frames: ", jumpSpeedFramesCount)
