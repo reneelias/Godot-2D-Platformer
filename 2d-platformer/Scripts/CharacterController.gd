@@ -48,8 +48,9 @@ func updatePlayerState():
 		else:
 			playerState = PlayerState.IDLE
 			animPlayer.play("Idle")
-	elif not is_on_floor() and velocity.y > 0:
+	elif not is_on_floor() and velocity.y > 60.0:
 		playerState = PlayerState.FALL
+		animPlayer.play("Fall")
 
 func movement():
 	velocity += Vector2(0, gravityScale)
@@ -85,8 +86,8 @@ func updateJump():
 	elif coyoteFramesCount < coyoteFrames:
 		coyoteFramesCount += 1
 	
-	if Input.is_action_just_pressed("Jump") and playerState != PlayerState.JUMP:
-		if is_on_floor() or coyoteFramesCount < coyoteFrames:
+	if Input.is_action_just_pressed("Jump"):
+		if is_on_floor() or coyoteFramesCount < coyoteFrames and playerState != PlayerState.JUMP:
 			jumpSpeedFramesCount = 0
 			jumpSpeedFrames = JUMP_FRAMES
 			velocity -= Vector2(0, jumpSpeed)
