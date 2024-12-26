@@ -239,6 +239,7 @@ position = Vector2(-58, -119)
 texture = ExtResource("2_21xkr")
 
 [node name="Player" parent="." instance=ExtResource("4_jjvhh")]
+z_index = 5
 position = Vector2(155, -105)
 moveSpeed = 5.0
 jumpSpeed = 80.0
@@ -257,6 +258,7 @@ tile_map_data = PackedByteArray("AAAFAAEAAAAAAAQAAAAFAAUAAAAAAAQAAAAGAAEAAAAAAAQ
 tile_set = SubResource("TileSet_h2yge")
 
 [node name="Scenery" type="TileMapLayer" parent="TileMapLayers"]
+light_mask = 2
 z_index = -50
 texture_filter = 1
 tile_map_data = PackedByteArray("AAAeAPn/AAAAAAAAABAOAPn/AAACAAAAAAADAP3/AAABAAAAAAA=")
@@ -272,6 +274,7 @@ texture = SubResource("GradientTexture2D_21xkr")
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 color = Color(0.278431, 0.768627, 1, 1)
 energy = 0.25
+range_item_cull_mask = 100634
 
 [node name="ShadowLight" type="PointLight2D" parent="."]
 position = Vector2(80, -40)
