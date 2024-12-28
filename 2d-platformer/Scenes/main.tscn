@@ -251,7 +251,7 @@ texture = ExtResource("2_21xkr")
 
 [node name="Player" parent="." instance=ExtResource("4_jjvhh")]
 z_index = 5
-position = Vector2(155, -105)
+position = Vector2(155, -104)
 moveSpeed = 5.0
 jumpSpeed = 80.0
 friction = 0.1
@@ -275,7 +275,7 @@ tile_map_data = PackedByteArray("AAD//wQAAAADAAAAAAAAAAQAAAAEAAAAAAD+/wQAAAADAAA
 tile_set = SubResource("TileSet_6bp64")
 
 [node name="Scenery_Background" type="TileMapLayer" parent="TileMapLayers"]
-modulate = Color(0.53234, 0.561046, 0.762514, 1)
+modulate = Color(0.623059, 0.650061, 0.824616, 1)
 light_mask = 2
 z_index = -50
 texture_filter = 1

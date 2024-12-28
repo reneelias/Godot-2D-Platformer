@@ -271,6 +271,7 @@ friction = 0.075
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_akhjb")
+offset = Vector2(0, -0.5)
 hframes = 4
 vframes = 5
 
