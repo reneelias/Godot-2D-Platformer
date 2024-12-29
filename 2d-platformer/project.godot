@@ -19,6 +19,15 @@ config/icon="res://Sprites/icon.svg"
 
 window/size/always_on_top=true
 
+[file_customization]
+
+folder_colors={
+"res://ObjectScenes/": "orange",
+"res://Scenes/": "green",
+"res://Scripts/": "red",
+"res://Sprites/": "blue"
+}
+
 [input]
 
 Jump={

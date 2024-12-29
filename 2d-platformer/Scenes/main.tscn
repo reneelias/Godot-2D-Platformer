@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b2t25v0wemtn3" path="res://Sprites/Brick.png" id="6_21xkr"]
 [ext_resource type="Texture2D" uid="uid://dmdlgegia3xjr" path="res://Sprites/Wall.png" id="7_6bp64"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0xm2m"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6bp64"]
 texture = ExtResource("3_6bp64")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -190,9 +190,9 @@ terrain_set_0/terrain_0/name = "Platforms_Blue"
 terrain_set_0/terrain_0/color = Color(0.201188, 0.495669, 0.705079, 1)
 terrain_set_0/terrain_1/name = "Platforms_Green"
 terrain_set_0/terrain_1/color = Color(0.215532, 0.625173, 0.470582, 1)
-sources/0 = SubResource("TileSetAtlasSource_0xm2m")
+sources/0 = SubResource("TileSetAtlasSource_6bp64")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_21xkr"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_344ge"]
 texture = ExtResource("5_kry3j")
 texture_region_size = Vector2i(24, 24)
 0:0/0 = 0
@@ -203,13 +203,13 @@ texture_region_size = Vector2i(24, 24)
 4:0/0 = 0
 4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6bp64"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ynf5e"]
 texture = ExtResource("6_21xkr")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_344ge"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hptm8"]
 texture = ExtResource("7_6bp64")
 0:0/0 = 0
 1:0/0 = 0
@@ -223,9 +223,9 @@ texture = ExtResource("7_6bp64")
 
 [sub_resource type="TileSet" id="TileSet_6bp64"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_21xkr")
-sources/1 = SubResource("TileSetAtlasSource_6bp64")
-sources/2 = SubResource("TileSetAtlasSource_344ge")
+sources/0 = SubResource("TileSetAtlasSource_344ge")
+sources/1 = SubResource("TileSetAtlasSource_ynf5e")
+sources/2 = SubResource("TileSetAtlasSource_hptm8")
 
 [sub_resource type="Gradient" id="Gradient_kry3j"]
 interpolation_mode = 2
