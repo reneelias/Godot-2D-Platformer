@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://b4do5snoudr7g"]
+[gd_scene load_steps=18 format=4 uid="uid://b4do5snoudr7g"]
 
 [ext_resource type="Texture2D" uid="uid://d362ldpb1x223" path="res://Sprites/NightSky_NoDither.png" id="1_kry3j"]
 [ext_resource type="Texture2D" uid="uid://dfwadawauebbi" path="res://Sprites/NightSky.png" id="2_21xkr"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ccwmsb5ujo4ku" path="res://ObjectScenes/Player.tscn" id="4_jjvhh"]
 [ext_resource type="Texture2D" uid="uid://lsi2svo66upj" path="res://Sprites/Scenery.png" id="5_kry3j"]
 [ext_resource type="Texture2D" uid="uid://b2t25v0wemtn3" path="res://Sprites/Brick.png" id="6_21xkr"]
+[ext_resource type="Texture2D" uid="uid://dmdlgegia3xjr" path="res://Sprites/Wall.png" id="7_6bp64"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0xm2m"]
 texture = ExtResource("3_6bp64")
@@ -208,10 +209,23 @@ texture = ExtResource("6_21xkr")
 1:0/0 = 0
 2:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_344ge"]
+texture = ExtResource("7_6bp64")
+0:0/0 = 0
+1:0/0 = 0
+1:0/0/probability = 0.1
+2:0/0 = 0
+2:0/0/probability = 0.15
+3:0/0 = 0
+3:0/0/probability = 0.2
+4:0/0 = 0
+4:0/0/probability = 0.3
+
 [sub_resource type="TileSet" id="TileSet_6bp64"]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_21xkr")
 sources/1 = SubResource("TileSetAtlasSource_6bp64")
+sources/2 = SubResource("TileSetAtlasSource_344ge")
 
 [sub_resource type="Gradient" id="Gradient_kry3j"]
 interpolation_mode = 2
@@ -284,10 +298,9 @@ tile_set = SubResource("TileSet_6bp64")
 
 [node name="Walls" type="TileMapLayer" parent="TileMapLayers"]
 modulate = Color(0.536381, 0.557009, 0.712872, 1)
-light_mask = 2
 z_index = -100
 texture_filter = 1
-tile_map_data = PackedByteArray("AAAKAPf/AQAAAAAAAAAKAPj/AQACAAAAAAAKAPn/AQAAAAAAAAALAPf/AQAAAAAAAAALAPj/AQACAAAAAAALAPn/AQABAAAAAAAMAPf/AQACAAAAAAAMAPj/AQABAAAAAAAMAPn/AQAAAAAAAAANAPf/AQAAAAAAAAANAPj/AQABAAAAAAANAPn/AQABAAAAAAAOAPf/AQACAAAAAAAOAPj/AQABAAAAAAAOAPn/AQAAAAAAAAAJAPf/AQABAAAAAAAPAPf/AQACAAAAAAAPAPj/AQABAAAAAAAPAPn/AQAAAAAAAAAJAPn/AQAAAAAAAAAJAPj/AQACAAAAAAA=")
+tile_map_data = PackedByteArray("AAAKAPf/AgAAAAAAAAAKAPj/AgACAAAAAGAKAPn/AgACAAAAACALAPf/AgAAAAAAAAALAPj/AgAEAAAAAAALAPn/AgAAAAAAAAAMAPf/AgACAAAAAAAMAPj/AgAAAAAAAAAMAPn/AgAEAAAAAAANAPf/AgAEAAAAAFANAPj/AgAAAAAAAAANAPn/AgAEAAAAAAAOAPf/AgAAAAAAAAAOAPj/AgAAAAAAAAAOAPn/AgAAAAAAAAAJAPf/AgAAAAAAAAAPAPf/AgADAAAAADAPAPj/AgAAAAAAAAAPAPn/AgABAAAAAAAJAPn/AgADAAAAAAAJAPj/AgAAAAAAAAA=")
 tile_set = SubResource("TileSet_6bp64")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
