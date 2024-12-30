@@ -27,16 +27,19 @@ var startPos : Vector2
 var inputVelocity := Vector2.ZERO
 
 enum PlayerState {
+	HUNCHED_OVER,
 	IDLE,
 	RUN,
 	JUMP,
 	FALL,
 	WALLHUG
 }
-var playerState := PlayerState.IDLE
+@export var playerState := PlayerState.IDLE
 
 func _ready():
 	startPos = global_position
+	if playerState == PlayerState.HUNCHED_OVER:
+		animPlayer.play("HunchedOver")
 
 func _physics_process(delta):
 	movement()
@@ -47,7 +50,7 @@ func updatePlayerState():
 		if inputVelocity.x != 0:
 			playerState = PlayerState.RUN
 			animPlayer.play("Run")
-		else:
+		elif playerState != PlayerState.HUNCHED_OVER:
 			playerState = PlayerState.IDLE
 			animPlayer.play("Idle")
 	# elif is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x:

@@ -297,7 +297,7 @@ tile_set = SubResource("TileSet_tf658")
 
 [node name="Player" parent="." instance=ExtResource("5_egvei")]
 z_index = 5
-position = Vector2(-18, 8)
+position = Vector2(-27, 8)
 moveSpeed = 5.0
 jumpSpeed = 80.0
 friction = 0.1
@@ -306,6 +306,7 @@ jumpSpeedFrames = 13
 maxVelX = 100.0
 jumpSpeedScaler = 0.375
 wallJumpSpeed = 150.0
+playerState = 0
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 color = Color(0.72438, 0.627832, 0.673503, 1)
@@ -316,7 +317,7 @@ range_item_cull_mask = 100634
 [node name="Lights" type="Node2D" parent="."]
 
 [node name="HangingLamp" parent="Lights" instance=ExtResource("7_fmco7")]
-position = Vector2(-9, -40)
+position = Vector2(-16, -40)
 flashes = true
 flashMinTime = 0.05
 flashMaxTime = 1.0
