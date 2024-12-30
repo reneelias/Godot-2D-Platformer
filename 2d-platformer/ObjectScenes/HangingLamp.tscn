@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dydguwvg4a50d"]
+
+[ext_resource type="Texture2D" uid="uid://dop1yny2emhva" path="res://Sprites/Lights.png" id="1_21f4b"]
+[ext_resource type="Texture2D" uid="uid://dfubj05gqhhe0" path="res://Sprites/PointLightTextures/PointLightTexture_05.png" id="3_habjr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6f4h"]
+atlas = ExtResource("1_21f4b")
+region = Rect2(49, 0, 15, 16)
+
+[node name="HangingLamp" type="Sprite2D"]
+texture = SubResource("AtlasTexture_m6f4h")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0.5, 32.675)
+color = Color(0.796078, 0.827451, 0.494118, 1)
+range_z_min = -100
+range_z_max = 50
+texture = ExtResource("3_habjr")
