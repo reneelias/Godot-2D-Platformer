@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://c50oapyik8qtr"]
+[gd_scene load_steps=16 format=4 uid="uid://c50oapyik8qtr"]
 
 [ext_resource type="Texture2D" uid="uid://ds06l1jfhigal" path="res://Sprites/Tiles.png" id="1_e0dve"]
 [ext_resource type="Texture2D" uid="uid://lsi2svo66upj" path="res://Sprites/Scenery.png" id="2_egvei"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dop1yny2emhva" path="res://Sprites/Lights.png" id="5_48sdu"]
 [ext_resource type="PackedScene" uid="uid://ccwmsb5ujo4ku" path="res://ObjectScenes/Player.tscn" id="5_egvei"]
 [ext_resource type="PackedScene" uid="uid://dydguwvg4a50d" path="res://ObjectScenes/HangingLamp.tscn" id="7_fmco7"]
+[ext_resource type="PackedScene" uid="uid://cnffxmilq3e7k" path="res://ObjectScenes/LongHangingLamp.tscn" id="8_2jryf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2jryf"]
 texture = ExtResource("1_e0dve")
@@ -271,7 +272,6 @@ tile_set = SubResource("TileSet_tf658")
 light_mask = 2
 z_index = -25
 texture_filter = 1
-tile_map_data = PackedByteArray("AAAGAP3/AwAAAAAAAAAHAP3/AwABAAAAAAAIAP3/AwABAAAAAAAJAP3/AwABAAAAAAAKAP3/AwACAAAAAAA=")
 tile_set = SubResource("TileSet_tf658")
 
 [node name="Scenery_Background" type="TileMapLayer" parent="TileMapLayers"]
@@ -316,3 +316,6 @@ range_item_cull_mask = 100634
 
 [node name="HangingLamp" parent="." instance=ExtResource("7_fmco7")]
 position = Vector2(-9, -40)
+
+[node name="LongHangingLamp" parent="." instance=ExtResource("8_2jryf")]
+position = Vector2(112, -40)
