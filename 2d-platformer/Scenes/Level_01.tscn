@@ -271,10 +271,11 @@ tile_set = SubResource("TileSet_tf658")
 [node name="Scenery_Midground" type="TileMapLayer" parent="TileMapLayers"]
 z_index = -25
 texture_filter = 1
+tile_map_data = PackedByteArray("AAAMAAAAAAAEAAAAAAA=")
 tile_set = SubResource("TileSet_tf658")
 
 [node name="Scenery_Background" type="TileMapLayer" parent="TileMapLayers"]
-modulate = Color(0.471002, 0.499283, 0.710415, 1)
+modulate = Color(0.371802, 0.396909, 0.6031, 1)
 z_index = -50
 texture_filter = 1
 tile_map_data = PackedByteArray("AAD+/wAAAAAAAAAAAAD//wAAAAACAAAAAAAAAAAAAAABAAAAAAA=")
@@ -312,11 +313,24 @@ energy = 0.5
 blend_mode = 1
 range_item_cull_mask = 100634
 
-[node name="HangingLamp" parent="." instance=ExtResource("7_fmco7")]
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="HangingLamp" parent="Lights" instance=ExtResource("7_fmco7")]
 position = Vector2(-9, -40)
 flashes = true
 flashMinTime = 0.05
 flashMaxTime = 1.0
 
-[node name="LongHangingLamp" parent="." instance=ExtResource("8_2jryf")]
-position = Vector2(112, -40)
+[node name="HangingLamp2" parent="Lights" instance=ExtResource("7_fmco7")]
+visible = false
+position = Vector2(200, -40)
+flashes = true
+flashMinTime = 0.05
+flashMaxTime = 1.0
+
+[node name="LongHangingLamp" parent="Lights" instance=ExtResource("8_2jryf")]
+visible = false
+position = Vector2(88, -40)
+
+[node name="LongHangingLamp2" parent="Lights" instance=ExtResource("8_2jryf")]
+position = Vector2(200, -40)
