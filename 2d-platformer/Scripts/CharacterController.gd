@@ -26,15 +26,31 @@ var startPos : Vector2
 @export var wallHugSpeed := 100.0
 var inputVelocity := Vector2.ZERO
 
+enum PlayerMode{
+	PLAYING,
+	CINEMATIC,
+	DIALOGUE
+}
+@export var playerMode := PlayerMode.PLAYING
+
 enum PlayerState {
 	HUNCHED_OVER,
 	IDLE,
 	RUN,
 	JUMP,
 	FALL,
-	WALLHUG
+	WALL_HUG
 }
 @export var playerState := PlayerState.IDLE
+
+var playerStateAnimDict : Dictionary = {
+	PlayerState.HUNCHED_OVER: "HunchedOver",
+	PlayerState.IDLE: "Idle",
+	PlayerState.RUN: "Run",
+	PlayerState.JUMP: "Jump",
+	PlayerState.FALL: "Fall",
+	PlayerState.WALL_HUG: "WallHug"
+}
 
 func _ready():
 	startPos = global_position
@@ -42,24 +58,26 @@ func _ready():
 		animPlayer.play("HunchedOver")
 
 func _physics_process(delta):
-	movement()
-	updatePlayerState()
+	match playerMode:
+		PlayerMode.PLAYING:
+			movement()
+			updatePlayerState()
+		PlayerMode.CINEMATIC:
+			pass
+		PlayerMode.DIALOGUE:
+			pass
 
 func updatePlayerState():
 	if is_on_floor():
 		if inputVelocity.x != 0:
-			playerState = PlayerState.RUN
-			animPlayer.play("Run")
+			setPlayerState(PlayerState.RUN)
 		elif playerState != PlayerState.HUNCHED_OVER:
-			playerState = PlayerState.IDLE
-			animPlayer.play("Idle")
+			setPlayerState(PlayerState.IDLE)
 	# elif is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x:
 	elif is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x and velocity.y > 0:
-		playerState = PlayerState.WALLHUG
-		animPlayer.play("WallHug")
+		setPlayerState(PlayerState.WALL_HUG)
 	elif not is_on_floor() and velocity.y > wallHugSpeed - 1:
-		playerState = PlayerState.FALL
-		animPlayer.play("Fall")
+		setPlayerState(PlayerState.FALL)
 
 func movement():
 	velocity += Vector2(0, gravityScale)
@@ -84,7 +102,7 @@ func movement():
 
 	updateJump()
 			
-	if playerState == PlayerState.WALLHUG:
+	if playerState == PlayerState.WALL_HUG:
 		velocity.y = min(velocity.y, wallHugSpeed)
 		
 	if Input.is_key_pressed(KEY_R):
@@ -104,8 +122,7 @@ func updateJump():
 			jumpSpeedFramesCount = 0
 			jumpSpeedFrames = JUMP_FRAMES
 			velocity -= Vector2(0, jumpSpeed)
-			playerState = PlayerState.JUMP
-			animPlayer.play("Jump")
+			setPlayerState(PlayerState.JUMP)
 		elif is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x:
 			jumpSpeedFramesCount = 0
 			jumpSpeedFrames = WALL_JUMP_FRAMES
@@ -113,9 +130,15 @@ func updateJump():
 			wallJumpVec = wallJumpVec.rotated(deg_to_rad(50) * wallJumpVec.x)
 			wallJumpVec.y = -abs(wallJumpVec.y)
 			velocity = wallJumpVec * wallJumpSpeed
-			playerState = PlayerState.JUMP
-			animPlayer.play("Jump")
-	# elif Input.is_action_pressed("Jump") and (playerState == PlayerState.JUMP or playerState == PlayerState.WALLHUG) and jumpSpeedFramesCount < jumpSpeedFrames:
+			setPlayerState(PlayerState.JUMP)
+	# elif Input.is_action_pressed("Jump") and (playerState == PlayerState.JUMP or playerState == PlayerState.WALL_HUG) and jumpSpeedFramesCount < jumpSpeedFrames:
 	elif Input.is_action_pressed("Jump") and playerState == PlayerState.JUMP and jumpSpeedFramesCount < jumpSpeedFrames:
 		jumpSpeedFramesCount += 1
 		velocity -= Vector2(0, jumpSpeed * jumpSpeedScaler * cos(float(jumpSpeedFramesCount)/jumpSpeedFrames * PI/2))
+
+func setPlayerState(state : PlayerState, overrideAnim : bool = false, animName : String = ""):
+	playerState = state
+	if overrideAnim:
+		animPlayer.play(animName)
+	else:
+		animPlayer.play(playerStateAnimDict[state])
