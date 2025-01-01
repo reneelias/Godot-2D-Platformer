@@ -24,7 +24,12 @@ var startPos : Vector2
 # const JUMP_SPEED_SCALER = .125
 @export var wallJumpSpeed := 200.0
 @export var wallHugSpeed := 100.0
+@export var wallCoyoteFrames := 5
+var wallCoyoteFramesCount := 0
 var inputVelocity := Vector2.ZERO
+var previousVelocity := Vector2.ZERO
+var prevVelCounter := 0
+var touchingWall := false
 
 enum PlayerMode{
 	PLAYING,
@@ -110,26 +115,37 @@ func movement():
 		velocity = Vector2.ZERO
 	
 	move_and_slide()
+	prevVelCounter += 1
+	if prevVelCounter % 2 == 0:
+		previousVelocity = velocity
 
 func updateJump():
 	if is_on_floor():
 		coyoteFramesCount = 0
 	elif coyoteFramesCount < coyoteFrames:
 		coyoteFramesCount += 1
+		
+	if is_on_wall() and (!touchingWall or get_wall_normal().x == -inputVelocity.normalized().x):
+		wallCoyoteFramesCount = 0
+	elif wallCoyoteFramesCount < wallCoyoteFrames:
+		wallCoyoteFramesCount += 1
+
+	touchingWall = is_on_wall()
 	
 	if Input.is_action_just_pressed("Jump"):
-		if is_on_floor() or coyoteFramesCount < coyoteFrames and playerState != PlayerState.JUMP:
+		if (is_on_floor() or coyoteFramesCount < coyoteFrames) and playerState != PlayerState.JUMP:
 			jumpSpeedFramesCount = 0
 			jumpSpeedFrames = JUMP_FRAMES
 			velocity -= Vector2(0, jumpSpeed)
 			setPlayerState(PlayerState.JUMP)
-		elif is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x:
+		elif (is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x) or wallCoyoteFramesCount < wallCoyoteFrames:
 			jumpSpeedFramesCount = 0
 			jumpSpeedFrames = WALL_JUMP_FRAMES
 			var wallJumpVec = get_wall_normal()
 			wallJumpVec = wallJumpVec.rotated(deg_to_rad(50) * wallJumpVec.x)
 			wallJumpVec.y = -abs(wallJumpVec.y)
 			velocity = wallJumpVec * wallJumpSpeed
+			wallCoyoteFramesCount = wallCoyoteFrames
 			setPlayerState(PlayerState.JUMP)
 	# elif Input.is_action_pressed("Jump") and (playerState == PlayerState.JUMP or playerState == PlayerState.WALL_HUG) and jumpSpeedFramesCount < jumpSpeedFrames:
 	elif Input.is_action_pressed("Jump") and playerState == PlayerState.JUMP and jumpSpeedFramesCount < jumpSpeedFrames:
