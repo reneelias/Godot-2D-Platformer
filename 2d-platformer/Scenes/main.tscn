@@ -274,7 +274,7 @@ jumpSpeedFrames = 13
 maxVelX = 100.0
 jumpSpeedScaler = 0.375
 wallJumpSpeed = 150.0
-wallCoyoteFrames = 10
+wallCoyoteFrames = 20
 
 [node name="TileMapLayers" type="Node2D" parent="."]
 

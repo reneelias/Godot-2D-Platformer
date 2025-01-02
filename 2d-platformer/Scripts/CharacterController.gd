@@ -79,7 +79,8 @@ func updatePlayerState():
 	# elif is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x:
 	elif is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x and velocity.y > 0:
 		setPlayerState(PlayerState.WALL_HUG)
-	elif not is_on_floor() and velocity.y > wallHugSpeed - 1 and wallCoyoteFrames >= wallCoyoteFramesCount:
+	# elif not is_on_floor() and playerState != PlayerState.WALL_HUG or wallCoyoteFrames >= wallCoyoteFramesCount:
+	elif not is_on_floor() and velocity.y > wallHugSpeed - 1 and (playerState != PlayerState.WALL_HUG or (playerState == PlayerState.WALL_HUG and !is_on_wall())):
 		setPlayerState(PlayerState.FALL)
 
 func movement():
@@ -120,7 +121,8 @@ func updateJump():
 	elif coyoteFramesCount < coyoteFrames:
 		coyoteFramesCount += 1
 		
-	if is_on_wall() and (!touchingWall or get_wall_normal().x == -inputVelocity.normalized().x):
+	# if is_on_wall() and (!touchingWall or get_wall_normal().x == -inputVelocity.normalized().x):
+	if (is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x) or playerState == PlayerState.WALL_HUG:
 		wallCoyoteFramesCount = 0
 	elif wallCoyoteFramesCount < wallCoyoteFrames:
 		wallCoyoteFramesCount += 1
@@ -133,15 +135,23 @@ func updateJump():
 			jumpSpeedFrames = JUMP_FRAMES
 			velocity -= Vector2(0, jumpSpeed)
 			setPlayerState(PlayerState.JUMP)
-		elif (is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x) or wallCoyoteFramesCount < wallCoyoteFrames:
+		elif (is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x) or playerState == PlayerState.WALL_HUG or wallCoyoteFramesCount < wallCoyoteFrames:
 			jumpSpeedFramesCount = 0
 			jumpSpeedFrames = WALL_JUMP_FRAMES
 			var wallJumpVec = get_wall_normal()
+			#
+			#	Remove wallJumpAngle later if unnecessary
+			#
 			var wallJumpAngle = 50 if (get_wall_normal().x == -inputVelocity.normalized().x or playerState == PlayerState.WALL_HUG) else 70
+			wallJumpAngle = 50
 			print("Wall Jump Angle: ", wallJumpAngle)
 			wallJumpVec = wallJumpVec.rotated(deg_to_rad(wallJumpAngle) * wallJumpVec.x)
 			wallJumpVec.y = -abs(wallJumpVec.y)
+			#
+			#	Remove wallJumpScaler later if unnecessary
+			#
 			var wallJumpScaler = 1.0 if (get_wall_normal().x == -inputVelocity.normalized().x or playerState == PlayerState.WALL_HUG) else .75
+			wallJumpScaler = 1.0
 			print("wallJumpScaler: ", wallJumpScaler)
 			velocity = wallJumpVec * wallJumpSpeed * wallJumpScaler
 			wallCoyoteFramesCount = wallCoyoteFrames
