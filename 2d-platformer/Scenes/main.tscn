@@ -269,12 +269,12 @@ position = Vector2(155, -104)
 moveSpeed = 5.0
 jumpSpeed = 80.0
 friction = 0.1
-inAirDamp = 0.9
+inAirDamp = 0.95
 jumpSpeedFrames = 13
 maxVelX = 100.0
 jumpSpeedScaler = 0.375
 wallJumpSpeed = 150.0
-wallCoyoteFrames = 20
+wallCoyoteFrames = 7
 
 [node name="TileMapLayers" type="Node2D" parent="."]
 
