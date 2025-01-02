@@ -303,8 +303,14 @@ _data = {
 script = ExtResource("1_tryvm")
 sprite2D = NodePath("Sprite2D")
 animPlayer = NodePath("AnimationPlayer")
-moveSpeed = 10.0
-friction = 0.075
+jumpSpeed = 80.0
+friction = 0.1
+inAirDamp = 0.925
+jumpSpeedFrames = 13
+maxVelX = 100.0
+jumpSpeedScaler = 0.375
+wallJumpSpeed = 150.0
+wallCoyoteFrames = 7
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_akhjb")

@@ -266,15 +266,6 @@ texture = ExtResource("2_21xkr")
 [node name="Player" parent="." instance=ExtResource("4_jjvhh")]
 z_index = 5
 position = Vector2(155, -104)
-moveSpeed = 5.0
-jumpSpeed = 80.0
-friction = 0.1
-inAirDamp = 0.95
-jumpSpeedFrames = 13
-maxVelX = 100.0
-jumpSpeedScaler = 0.375
-wallJumpSpeed = 150.0
-wallCoyoteFrames = 7
 
 [node name="TileMapLayers" type="Node2D" parent="."]
 
