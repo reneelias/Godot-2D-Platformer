@@ -88,11 +88,8 @@ func movement():
 	inputVelocity = Vector2.ZERO
 
 	var moveSpeedVec := Vector2(moveSpeed, 0)
-	if Input.is_key_pressed(KEY_A):
-		inputVelocity -= moveSpeedVec * (inAirDamp if (not is_on_floor()) else 1.0)
-	if Input.is_key_pressed(KEY_D):
-		inputVelocity += moveSpeedVec * (inAirDamp if (not is_on_floor()) else 1.0)
-		
+	inputVelocity += moveSpeedVec * Input.get_axis("MoveLeft", "MoveRight") * (inAirDamp if (not is_on_floor()) else 1.0)
+
 	if is_on_floor() and inputVelocity.length() == 0:
 		velocity -= Vector2(velocity.x * friction, 0)
 	
