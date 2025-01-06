@@ -5,7 +5,7 @@ class_name CharacterController
 @export var sprite2D : Sprite2D
 @export var animPlayer : AnimationPlayer
 
-@export_category("Physics")
+@export_category("Movement Physics")
 @export var gravityScale := 9.81
 @export var moveSpeed := 5.0
 @export var jumpSpeed := 100.0
@@ -21,10 +21,11 @@ var coyoteFramesCount := 0
 var startPos : Vector2
 ## Used for scaling extended jump frames speed
 @export var jumpSpeedScaler := .125
-# const JUMP_SPEED_SCALER = .125
+@export_category("Wall Jumping")
 @export var wallJumpSpeed := 200.0
 @export var wallHugSpeed := 100.0
 @export var wallCoyoteFrames := 5
+@export var wallJumpAngle := 50.0
 var wallCoyoteFramesCount := 0
 var inputVelocity := Vector2.ZERO
 var touchingWall := false
@@ -76,10 +77,8 @@ func updatePlayerState():
 			setPlayerState(PlayerState.RUN)
 		elif playerState != PlayerState.HUNCHED_OVER:
 			setPlayerState(PlayerState.IDLE)
-	# elif is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x:
 	elif is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x and velocity.y > 0:
 		setPlayerState(PlayerState.WALL_HUG)
-	# elif not is_on_floor() and playerState != PlayerState.WALL_HUG or wallCoyoteFrames >= wallCoyoteFramesCount:
 	elif not is_on_floor() and velocity.y > wallHugSpeed - 1 and (playerState != PlayerState.WALL_HUG or (playerState == PlayerState.WALL_HUG and !is_on_wall())):
 		setPlayerState(PlayerState.FALL)
 
@@ -118,7 +117,6 @@ func updateJump():
 	elif coyoteFramesCount < coyoteFrames:
 		coyoteFramesCount += 1
 		
-	# if is_on_wall() and (!touchingWall or get_wall_normal().x == -inputVelocity.normalized().x):
 	if (is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x) or playerState == PlayerState.WALL_HUG:
 		wallCoyoteFramesCount = 0
 	elif wallCoyoteFramesCount < wallCoyoteFrames:
@@ -136,24 +134,11 @@ func updateJump():
 			jumpSpeedFramesCount = 0
 			jumpSpeedFrames = WALL_JUMP_FRAMES
 			var wallJumpVec = get_wall_normal()
-			#
-			#	Remove wallJumpAngle later if unnecessary
-			#
-			var wallJumpAngle = 50 if (get_wall_normal().x == -inputVelocity.normalized().x or playerState == PlayerState.WALL_HUG) else 70
-			wallJumpAngle = 50
-			print("Wall Jump Angle: ", wallJumpAngle)
 			wallJumpVec = wallJumpVec.rotated(deg_to_rad(wallJumpAngle) * wallJumpVec.x)
 			wallJumpVec.y = -abs(wallJumpVec.y)
-			#
-			#	Remove wallJumpScaler later if unnecessary
-			#
-			var wallJumpScaler = 1.0 if (get_wall_normal().x == -inputVelocity.normalized().x or playerState == PlayerState.WALL_HUG) else .75
-			wallJumpScaler = 1.0
-			print("wallJumpScaler: ", wallJumpScaler)
-			velocity = wallJumpVec * wallJumpSpeed * wallJumpScaler
+			velocity = wallJumpVec * wallJumpSpeed
 			wallCoyoteFramesCount = wallCoyoteFrames
 			setPlayerState(PlayerState.JUMP, "" if get_wall_normal().x == -inputVelocity.normalized().x  else "WallJump")
-	# elif Input.is_action_pressed("Jump") and (playerState == PlayerState.JUMP or playerState == PlayerState.WALL_HUG) and jumpSpeedFramesCount < jumpSpeedFrames:
 	elif Input.is_action_pressed("Jump") and playerState == PlayerState.JUMP and jumpSpeedFramesCount < jumpSpeedFrames:
 		jumpSpeedFramesCount += 1
 		velocity -= Vector2(0, jumpSpeed * jumpSpeedScaler * cos(float(jumpSpeedFramesCount)/jumpSpeedFrames * PI/2))
