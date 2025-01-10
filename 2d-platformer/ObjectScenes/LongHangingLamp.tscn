@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnffxmilq3e7k"]
+[gd_scene load_steps=5 format=3 uid="uid://cnffxmilq3e7k"]
 
 [ext_resource type="Texture2D" uid="uid://dop1yny2emhva" path="res://Sprites/Lights.png" id="1_dsf17"]
 [ext_resource type="Texture2D" uid="uid://cg2vjss0yay87" path="res://Sprites/PointLightTextures/PointLightTexture_07.png" id="2_o745o"]
+[ext_resource type="Script" uid="uid://cyn2niocuqrna" path="res://Scripts/LightController.gd" id="2_yinab"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m6f4h"]
 atlas = ExtResource("1_dsf17")
@@ -9,6 +10,7 @@ region = Rect2(0, 0, 49, 16)
 
 [node name="LongHangingLamp" type="Sprite2D"]
 texture = SubResource("AtlasTexture_m6f4h")
+script = ExtResource("2_yinab")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(-0.5, 30.5)
