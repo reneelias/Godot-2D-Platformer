@@ -394,6 +394,7 @@ tile_set = SubResource("TileSet_tf658")
 [node name="Player" parent="." instance=ExtResource("5_egvei")]
 z_index = 5
 position = Vector2(-27, 8)
+friction = 0.2
 playerState = 0
 
 [node name="BrighteningLight" type="DirectionalLight2D" parent="."]
