@@ -682,6 +682,7 @@ scroll_scale = Vector2(0.025, 0.025)
 scroll_offset = Vector2(0, 270)
 
 [node name="CityNightSky" type="Sprite2D" parent="NightSkyParallax"]
+modulate = Color(0.925353, 0.925353, 0.925353, 1)
 z_index = -200
 position = Vector2(769, -57)
 scale = Vector2(0.75, 0.75)
