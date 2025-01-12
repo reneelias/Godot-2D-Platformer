@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://c50oapyik8qtr"]
+[gd_scene load_steps=29 format=4 uid="uid://c50oapyik8qtr"]
 
 [ext_resource type="Texture2D" uid="uid://ds06l1jfhigal" path="res://Sprites/Tiles.png" id="1_e0dve"]
 [ext_resource type="Texture2D" uid="uid://lsi2svo66upj" path="res://Sprites/Scenery.png" id="2_egvei"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://dgsfaod2xrlrx" path="res://Sprites/WarehouseWindows.png" id="8_0s7bq"]
 [ext_resource type="PackedScene" uid="uid://cnffxmilq3e7k" path="res://ObjectScenes/LongHangingLamp.tscn" id="8_2jryf"]
 [ext_resource type="Texture2D" uid="uid://dr77g4kvj06hb" path="res://Sprites/Particles.png" id="9_82yn4"]
+[ext_resource type="Texture2D" uid="uid://d362ldpb1x223" path="res://Sprites/NightSky_NoDither.png" id="13_cnu50"]
+[ext_resource type="Texture2D" uid="uid://c0tcs55ux5og6" path="res://Sprites/Buildings_Far.png" id="14_cnu50"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2jryf"]
 texture = ExtResource("1_e0dve")
@@ -631,6 +633,26 @@ hue_variation_max = 0.31
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0s7bq")
+
+[node name="NightSkyParallax" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.025, 0.025)
+scroll_offset = Vector2(0, 240)
+
+[node name="CityNightSky" type="Sprite2D" parent="NightSkyParallax"]
+z_index = -200
+position = Vector2(769, -57)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("13_cnu50")
+
+[node name="BuildingsParallax" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.15, 0.15)
+scroll_offset = Vector2(0, 300)
+
+[node name="BuildingsFar" type="Sprite2D" parent="BuildingsParallax"]
+z_index = -150
+position = Vector2(627, -87)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("14_cnu50")
 
 [editable path="Lights/LongHangingLamp_02"]
 [editable path="Lights/LongHangingLamp_03"]
