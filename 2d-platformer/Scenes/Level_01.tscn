@@ -697,7 +697,9 @@ position = Vector2(627, -87)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("14_cnu50")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="Rain" type="Node2D" parent="."]
+
+[node name="Rain_Foreground" type="GPUParticles2D" parent="Rain"]
 z_index = -110
 position = Vector2(851, -97)
 amount = 200
@@ -706,7 +708,7 @@ draw_order = 0
 texture = SubResource("GradientTexture1D_tmab6")
 process_material = SubResource("ParticleProcessMaterial_mm5uc")
 
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+[node name="Rain_Background" type="GPUParticles2D" parent="Rain"]
 z_index = -110
 position = Vector2(851, -97)
 amount = 200
