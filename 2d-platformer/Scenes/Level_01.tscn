@@ -419,7 +419,7 @@ visible = false
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 color = Color(0.72438, 0.627832, 0.673503, 1)
-energy = 0.5
+energy = 0.45
 blend_mode = 1
 range_item_cull_mask = 100634
 
@@ -432,11 +432,6 @@ flashMinTime = 0.05
 flashMaxTime = 1.0
 
 [node name="HangingLamp2" parent="Lights" instance=ExtResource("7_fmco7")]
-position = Vector2(200, -40)
-flashMinTime = 0.05
-flashMaxTime = 1.0
-
-[node name="HangingLamp3" parent="Lights" instance=ExtResource("7_fmco7")]
 position = Vector2(200, -40)
 flashMinTime = 0.05
 flashMaxTime = 1.0

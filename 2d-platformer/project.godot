@@ -25,6 +25,7 @@ folder_colors={
 "res://ObjectScenes/": "orange",
 "res://Scenes/": "green",
 "res://Scripts/": "red",
+"res://Shaders/": "pink",
 "res://Sprites/": "blue"
 }
 
