@@ -16,6 +16,7 @@ pointLight = NodePath("PointLight2D")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0.5, 32.675)
 color = Color(0.796078, 0.827451, 0.494118, 1)
+energy = 0.9
 range_z_min = -100
-range_z_max = 50
+range_z_max = 150
 texture = ExtResource("3_habjr")

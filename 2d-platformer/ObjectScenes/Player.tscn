@@ -337,6 +337,7 @@ zoom = Vector2(4, 4)
 script = ExtResource("3_5podq")
 
 [node name="ChromaticAberration" type="TextureRect" parent="Camera2D"]
+z_index = 100
 material = SubResource("ShaderMaterial_1gky5")
 offset_left = -144.0
 offset_top = -81.0
