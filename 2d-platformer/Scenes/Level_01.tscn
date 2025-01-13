@@ -473,8 +473,9 @@ playerState = 0
 visible = false
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+position = Vector2(-211, 38)
 color = Color(0.72438, 0.627832, 0.673503, 1)
-energy = 0.45
+energy = 0.5
 blend_mode = 1
 range_item_cull_mask = 100634
 
