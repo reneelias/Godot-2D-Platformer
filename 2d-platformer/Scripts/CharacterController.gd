@@ -9,9 +9,12 @@ class_name CharacterController
 @export var gravityScale := 9.81
 @export var moveSpeed := 5.0
 @export var jumpSpeed := 100.0
-@export var friction := .025
+## The higher the number, the less friction affects the player
+@export var frictionSpeedRetention := .25
 @export var inAirDamp := .5
 @export var jumpSpeedFrames := 10
+## How much velocity scaled down by when turning
+@export var turnSpeedScaler := .5
 const JUMP_FRAMES = 9
 const WALL_JUMP_FRAMES = 6
 var jumpSpeedFramesCount := 0
@@ -90,9 +93,14 @@ func movement():
 	inputVelocity += moveSpeedVec * Input.get_axis("MoveLeft", "MoveRight") * (inAirDamp if (not is_on_floor()) else 1.0)
 
 	if is_on_floor() and inputVelocity.length() == 0:
-		velocity -= Vector2(velocity.x * friction, 0)
+		velocity.x *= frictionSpeedRetention
 	
-	velocity += inputVelocity
+	if inputVelocity.x != 0 and velocity.x != 0 and abs(inputVelocity.x)/inputVelocity.x != abs(velocity.x)/velocity.x and is_on_floor():
+		velocity.x = moveSpeed * Input.get_axis("MoveLeft", "MoveRight") * (inAirDamp if (not is_on_floor()) else 1.0) * turnSpeedScaler
+		# velocity.x *= turnSpeedScaler
+	else:
+		velocity += inputVelocity
+
 	if abs(velocity.x) > maxVelX:
 		velocity.x = maxVelX if velocity.x > 0 else -maxVelX
 	
