@@ -326,7 +326,7 @@ wallCoyoteFrames = 10
 texture = ExtResource("3_akhjb")
 offset = Vector2(0, -0.5)
 hframes = 4
-vframes = 6
+vframes = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
