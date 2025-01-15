@@ -11,7 +11,7 @@ size = Vector2(8, 11.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1gky5"]
 shader = ExtResource("4_wpivi")
-shader_parameter/offset = 1.0
+shader_parameter/offset = 1.5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wpivi"]
 atlas = ExtResource("4_akhjb")
