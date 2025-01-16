@@ -266,6 +266,7 @@ texture = ExtResource("2_21xkr")
 [node name="Player" parent="." instance=ExtResource("4_jjvhh")]
 z_index = 5
 position = Vector2(155, -104)
+frictionSpeedRetention = 0.785
 
 [node name="TileMapLayers" type="Node2D" parent="."]
 

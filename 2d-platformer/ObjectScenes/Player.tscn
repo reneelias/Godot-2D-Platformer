@@ -359,6 +359,7 @@ script = ExtResource("1_tryvm")
 sprite2D = NodePath("Sprite2D")
 animPlayer = NodePath("AnimationPlayer")
 jumpSpeed = 80.0
+frictionSpeedRetention = 0.785
 inAirDamp = 0.95
 jumpSpeedFrames = 13
 turnSpeedScaler = 0.375
