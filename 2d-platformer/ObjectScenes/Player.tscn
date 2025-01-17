@@ -40,7 +40,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [PackedVector2Array(-3.5, 0, 4.5, 0, 4.5, 7, 3.5, 8, -2.5, 8, -3.5, 7)]
+"values": [PackedVector2Array(-3.5, 0, 4.5, 0, 4.5, 6.5, 3.5, 7.5, -2.5, 7.5, -3.5, 6.5)]
 }
 
 [sub_resource type="Animation" id="Animation_1gky5"]
@@ -70,7 +70,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [PackedVector2Array(-3, -7.5, 4, -7.5, 4, 7, 3, 8, -2, 8, -3, 7)]
+"values": [PackedVector2Array(-3, -7.5, 4, -7.5, 4, 6.5, 3, 7.5, -2, 7.5, -3, 6.5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -112,7 +112,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [PackedVector2Array(-3, -4, 4, -4, 4, 7, 3, 8, -2, 8, -3, 7)]
+"values": [PackedVector2Array(-3, -4, 4, -4, 4, 6.5, 3, 7.5, -2, 7.5, -3, 6.5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -154,7 +154,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [PackedVector2Array(-3, -7.5, 4, -7.5, 4, 7, 3, 8, -2, 8, -3, 7)]
+"values": [PackedVector2Array(-3, -7.5, 4, -7.5, 4, 6.5, 3, 7.5, -2, 7.5, -3, 6.5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -194,7 +194,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.0833333, 0.166667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [PackedVector2Array(-3, -4.5, 4, -4.5, 4, 7, 3, 8, -2, 8, -3, 7), PackedVector2Array(-3, -6, 4, -6, 4, 7, 3, 8, -2, 8, -3, 7), PackedVector2Array(-3, -7.5, 4, -7.5, 4, 7, 3, 8, -2, 8, -3, 7)]
+"values": [PackedVector2Array(-3, -4.5, 4, -4.5, 4, 6.5, 3, 7.5, -2, 7.5, -3, 6.5), PackedVector2Array(-3, -6, 4, -6, 4, 6.5, 3, 7.5, -2, 7.5, -3, 6.5), PackedVector2Array(-3, -7.5, 4, -7.5, 4, 6.5, 3, 7.5, -2, 7.5, -3, 6.5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -275,7 +275,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [PackedVector2Array(-3, -7.5, 4, -7.5, 4, 7, 3, 8, -2, 8, -3, 7)]
+"values": [PackedVector2Array(-3, -7.5, 4, -7.5, 4, 6.5, 3, 7.5, -2, 7.5, -3, 6.5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
