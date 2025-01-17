@@ -24,6 +24,10 @@ var coyoteFramesCount := 0
 var startPos : Vector2
 ## Used for scaling extended jump frames speed
 @export var jumpSpeedScaler := .125
+## Used to decrease friction when the player is sliding
+@export var slideFrictionMod := 1.3
+## Modifier for slideFrictionMod. This is used to increase the slide friction over time.
+var slideFrictionModMod := 1.0
 @export_category("Wall Jumping")
 @export var wallJumpSpeed := 200.0
 @export var wallHugSpeed := 100.0
@@ -47,7 +51,8 @@ enum PlayerState {
 	JUMP,
 	FALL,
 	WALL_HUG,
-	CROUCHED
+	CROUCHED,
+	SLIDING
 }
 @export var playerState := PlayerState.IDLE
 
@@ -58,7 +63,8 @@ var playerStateAnimDict : Dictionary = {
 	PlayerState.JUMP: "Jump",
 	PlayerState.FALL: "Fall",
 	PlayerState.WALL_HUG: "WallHug",
-	PlayerState.CROUCHED: "Crouch"
+	PlayerState.CROUCHED: "Crouch",
+	PlayerState.SLIDING: "Slide"
 }
 
 func _ready():
@@ -78,7 +84,14 @@ func _physics_process(delta):
 
 func updatePlayerState():
 	if Input.is_action_pressed("Down"):
-		setPlayerState(PlayerState.CROUCHED)
+		if abs(velocity.x) < .15:
+			setPlayerState(PlayerState.CROUCHED)
+		else:
+			if playerState != PlayerState.SLIDING:
+				slideFrictionModMod = 1.0
+			else:
+				slideFrictionModMod += .0025
+			setPlayerState(PlayerState.SLIDING)
 	elif is_on_floor():
 		if inputVelocity.x != 0:
 			setPlayerState(PlayerState.RUN)
@@ -92,24 +105,26 @@ func updatePlayerState():
 func movement():
 	velocity += Vector2(0, gravityScale)
 	inputVelocity = Vector2.ZERO
-	if playerState != PlayerState.CROUCHED:
-		var moveSpeedVec := Vector2(moveSpeed, 0)
+
+	var moveSpeedVec := Vector2(moveSpeed, 0)
+	
+	if playerState != PlayerState.CROUCHED and playerState != PlayerState.SLIDING:
 		inputVelocity += moveSpeedVec * Input.get_axis("MoveLeft", "MoveRight") * (inAirDamp if (not is_on_floor()) else 1.0)
 
-		if is_on_floor() and inputVelocity.length() == 0:
-			velocity.x *= frictionSpeedRetention
-		
-		if inputVelocity.x != 0 and velocity.x != 0 and abs(inputVelocity.x)/inputVelocity.x != abs(velocity.x)/velocity.x and is_on_floor():
-			velocity.x = moveSpeed * Input.get_axis("MoveLeft", "MoveRight") * (inAirDamp if (not is_on_floor()) else 1.0) * turnSpeedScaler
-			# velocity.x *= turnSpeedScaler
-		else:
-			velocity += inputVelocity
+	if is_on_floor() and inputVelocity.length() == 0:
+		velocity.x *= frictionSpeedRetention * (1.0 if playerState != PlayerState.SLIDING else slideFrictionMod / slideFrictionModMod)
+	
+	if inputVelocity.x != 0 and velocity.x != 0 and abs(inputVelocity.x)/inputVelocity.x != abs(velocity.x)/velocity.x and is_on_floor():
+		velocity.x = moveSpeed * Input.get_axis("MoveLeft", "MoveRight") * (inAirDamp if (not is_on_floor()) else 1.0) * turnSpeedScaler
+		# velocity.x *= turnSpeedScaler
+	else:
+		velocity += inputVelocity
 
-		if abs(velocity.x) > maxVelX:
-			velocity.x = maxVelX if velocity.x > 0 else -maxVelX
-		
-		if inputVelocity.x != 0:
-			sprite2D.flip_h = inputVelocity.x < 0
+	if abs(velocity.x) > maxVelX:
+		velocity.x = maxVelX if velocity.x > 0 else -maxVelX
+	
+	if inputVelocity.x != 0:
+		sprite2D.flip_h = inputVelocity.x < 0
 	
 
 	updateJump()
