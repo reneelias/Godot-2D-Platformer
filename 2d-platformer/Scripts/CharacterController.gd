@@ -28,6 +28,7 @@ var startPos : Vector2
 @export var slideFrictionMod := 1.3
 ## Modifier for slideFrictionMod. This is used to increase the slide friction over time.
 var slideFrictionModMod := 1.0
+@export var crouchSpeedThreshold := 25.0
 @export_category("Wall Jumping")
 @export var wallJumpSpeed := 200.0
 @export var wallHugSpeed := 100.0
@@ -84,7 +85,7 @@ func _physics_process(delta):
 
 func updatePlayerState():
 	if Input.is_action_pressed("Down"):
-		if abs(velocity.x) < .15:
+		if abs(velocity.x) < crouchSpeedThreshold:
 			setPlayerState(PlayerState.CROUCHED)
 		else:
 			if playerState != PlayerState.SLIDING:
