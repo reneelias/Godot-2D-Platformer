@@ -14,6 +14,35 @@ shader_parameter/offset = 1.5
 atlas = ExtResource("4_akhjb")
 region = Rect2(80, 0, 16, 16)
 
+[sub_resource type="Animation" id="Animation_7ig1s"]
+resource_name = "Crouch"
+length = 0.142871
+step = 0.142857
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [24]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionPolygon2D:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [PackedVector2Array(-3, 0, 4, 0, 4, 7, 3, 8, -2, 8, -3, 7)]
+}
+
 [sub_resource type="Animation" id="Animation_1gky5"]
 resource_name = "Fall"
 length = 0.500013
@@ -342,35 +371,6 @@ tracks/2/keys = {
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_7ig1s"]
-resource_name = "Crouch"
-length = 0.142871
-step = 0.142857
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.001),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [24]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionPolygon2D:polygon")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [PackedVector2Array(-3, 0, 4, 0, 4, 7, 3, 8, -2, 8, -3, 7)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wpivi"]
 _data = {
 &"Crouch": SubResource("Animation_7ig1s"),
@@ -402,7 +402,7 @@ wallCoyoteFrames = 10
 texture = ExtResource("3_akhjb")
 offset = Vector2(0, -0.5)
 hframes = 4
-vframes = 7
+vframes = 8
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-3, -7.5, 4, -7.5, 4, 7, 3, 8, -2, 8, -3, 7)

@@ -46,7 +46,8 @@ enum PlayerState {
 	RUN,
 	JUMP,
 	FALL,
-	WALL_HUG
+	WALL_HUG,
+	CROUCHED
 }
 @export var playerState := PlayerState.IDLE
 
@@ -56,7 +57,8 @@ var playerStateAnimDict : Dictionary = {
 	PlayerState.RUN: "Run",
 	PlayerState.JUMP: "Jump",
 	PlayerState.FALL: "Fall",
-	PlayerState.WALL_HUG: "WallHug"
+	PlayerState.WALL_HUG: "WallHug",
+	PlayerState.CROUCHED: "Crouch"
 }
 
 func _ready():
@@ -75,7 +77,9 @@ func _physics_process(delta):
 			pass
 
 func updatePlayerState():
-	if is_on_floor():
+	if Input.is_action_pressed("Down"):
+		setPlayerState(PlayerState.CROUCHED)
+	elif is_on_floor():
 		if inputVelocity.x != 0:
 			setPlayerState(PlayerState.RUN)
 		elif playerState != PlayerState.HUNCHED_OVER:
@@ -88,24 +92,24 @@ func updatePlayerState():
 func movement():
 	velocity += Vector2(0, gravityScale)
 	inputVelocity = Vector2.ZERO
+	if playerState != PlayerState.CROUCHED:
+		var moveSpeedVec := Vector2(moveSpeed, 0)
+		inputVelocity += moveSpeedVec * Input.get_axis("MoveLeft", "MoveRight") * (inAirDamp if (not is_on_floor()) else 1.0)
 
-	var moveSpeedVec := Vector2(moveSpeed, 0)
-	inputVelocity += moveSpeedVec * Input.get_axis("MoveLeft", "MoveRight") * (inAirDamp if (not is_on_floor()) else 1.0)
+		if is_on_floor() and inputVelocity.length() == 0:
+			velocity.x *= frictionSpeedRetention
+		
+		if inputVelocity.x != 0 and velocity.x != 0 and abs(inputVelocity.x)/inputVelocity.x != abs(velocity.x)/velocity.x and is_on_floor():
+			velocity.x = moveSpeed * Input.get_axis("MoveLeft", "MoveRight") * (inAirDamp if (not is_on_floor()) else 1.0) * turnSpeedScaler
+			# velocity.x *= turnSpeedScaler
+		else:
+			velocity += inputVelocity
 
-	if is_on_floor() and inputVelocity.length() == 0:
-		velocity.x *= frictionSpeedRetention
-	
-	if inputVelocity.x != 0 and velocity.x != 0 and abs(inputVelocity.x)/inputVelocity.x != abs(velocity.x)/velocity.x and is_on_floor():
-		velocity.x = moveSpeed * Input.get_axis("MoveLeft", "MoveRight") * (inAirDamp if (not is_on_floor()) else 1.0) * turnSpeedScaler
-		# velocity.x *= turnSpeedScaler
-	else:
-		velocity += inputVelocity
-
-	if abs(velocity.x) > maxVelX:
-		velocity.x = maxVelX if velocity.x > 0 else -maxVelX
-	
-	if inputVelocity.x != 0:
-		sprite2D.flip_h = inputVelocity.x < 0
+		if abs(velocity.x) > maxVelX:
+			velocity.x = maxVelX if velocity.x > 0 else -maxVelX
+		
+		if inputVelocity.x != 0:
+			sprite2D.flip_h = inputVelocity.x < 0
 	
 
 	updateJump()
