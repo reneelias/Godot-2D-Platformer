@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://biuvghtgdv7sj"]
+
+[ext_resource type="Texture2D" uid="uid://v1eh883jwpk8" path="res://Sprites/Compactor.png" id="1_6w4xo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vet0u"]
+atlas = ExtResource("1_6w4xo")
+region = Rect2(118, 10, 35, 71)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i51a0"]
+size = Vector2(35, 71)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6w4xo"]
+atlas = ExtResource("1_6w4xo")
+region = Rect2(53, 14, 53, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i51a0"]
+atlas = ExtResource("1_6w4xo")
+region = Rect2(6, 8, 30, 80)
+
+[node name="Compactor" type="Node2D"]
+
+[node name="Weight_Rigidbody" type="StaticBody2D" parent="."]
+z_index = 4
+position = Vector2(19, 0)
+
+[node name="Weight_Sprite" type="Sprite2D" parent="Weight_Rigidbody"]
+texture = SubResource("AtlasTexture_vet0u")
+
+[node name="Weight_CollisionShape" type="CollisionShape2D" parent="Weight_Rigidbody"]
+shape = SubResource("RectangleShape2D_i51a0")
+
+[node name="Hydraulics_Sprite" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_6w4xo")
+
+[node name="Machine_Sprite" type="Sprite2D" parent="."]
+position = Vector2(-41, 5)
+texture = SubResource("AtlasTexture_i51a0")
