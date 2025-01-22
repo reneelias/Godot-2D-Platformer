@@ -4,7 +4,7 @@ class_name CharacterController
 @export_group("References")
 @export var sprite2D : Sprite2D
 @export var animPlayer : AnimationPlayer
-@export var crouchRaycast : RayCast2D
+@export var raycasts : PlayerRaycasts
 
 @export_category("Movement Physics")
 @export var gravityScale := 9.81
@@ -74,6 +74,7 @@ func _ready():
 	startPos = global_position
 	if playerState == PlayerState.HUNCHED_OVER:
 		animPlayer.play("HunchedOver")
+	raycasts.horizontal_squish.connect(Callable(self, "horizontalSquish"))
 
 func _physics_process(delta):
 	match playerMode:
@@ -86,7 +87,7 @@ func _physics_process(delta):
 			pass
 
 func updatePlayerState():
-	if Input.is_action_pressed("Down") or ((playerState == PlayerState.CROUCHED or playerState == PlayerState.SLIDING) and crouchRaycast.is_colliding()):
+	if Input.is_action_pressed("Down") or ((playerState == PlayerState.CROUCHED or playerState == PlayerState.SLIDING) and raycasts.crouchRaycastCollision):
 		if abs(velocity.x) < crouchSpeedThreshold:
 			setPlayerState(PlayerState.CROUCHED)
 		else:
@@ -137,7 +138,6 @@ func movement():
 		global_position = startPos
 		velocity = Vector2.ZERO
 
-	
 	move_and_slide()
 
 func updateJump():
@@ -180,5 +180,12 @@ func setPlayerState(state : PlayerState, animName : String = ""):
 func squishBodyEntered(body):
 	if playerState != PlayerState.CROUCHED and playerState != PlayerState.SLIDING and body.name != "Player":
 		print(body.name)
+		velocity = Vector2.ZERO
+		global_position = startPos
+
+func horizontalSquish():
+	return
+	if playerState != PlayerState.CROUCHED and playerState != PlayerState.SLIDING:
+		print("squish")
 		velocity = Vector2.ZERO
 		global_position = startPos

@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://ccwmsb5ujo4ku"]
+[gd_scene load_steps=21 format=3 uid="uid://ccwmsb5ujo4ku"]
 
 [ext_resource type="Script" uid="uid://c71maiyhaww64" path="res://Scripts/CharacterController.gd" id="1_tryvm"]
 [ext_resource type="Script" uid="uid://c43q83dh0qpt7" path="res://Scripts/CameraController.gd" id="3_5podq"]
 [ext_resource type="Texture2D" uid="uid://3s0xlldium38" path="res://Sprites/Character_SpriteSheet.png" id="3_akhjb"]
 [ext_resource type="Texture2D" uid="uid://dmdlgegia3xjr" path="res://Sprites/Wall.png" id="4_akhjb"]
 [ext_resource type="Shader" uid="uid://ek88p73cly8c" path="res://Shaders/ChromaticAberration.gdshader" id="4_wpivi"]
+[ext_resource type="Script" uid="uid://cngs6j31hkdcj" path="res://Scripts/PlayerRaycasts.gd" id="6_1gky5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1gky5"]
 shader = ExtResource("4_wpivi")
@@ -416,11 +417,12 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpivi"]
 size = Vector2(4, 9)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite2D", "animPlayer", "crouchRaycast")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite2D", "animPlayer", "crouchRaycast", "raycasts")]
 script = ExtResource("1_tryvm")
 sprite2D = NodePath("Sprite2D")
 animPlayer = NodePath("AnimationPlayer")
 crouchRaycast = NodePath("Raycasts/CrouchRaycast")
+raycasts = NodePath("Raycasts")
 jumpSpeed = 80.0
 frictionSpeedRetention = 0.785
 inAirDamp = 0.95
@@ -459,10 +461,22 @@ libraries = {
 }
 autoplay = "Idle"
 
-[node name="Raycasts" type="Node2D" parent="."]
+[node name="Raycasts" type="Node2D" parent="." node_paths=PackedStringArray("_crouchRaycast", "_squishRaycastLeft", "_squishRaycastRight")]
+script = ExtResource("6_1gky5")
+_crouchRaycast = NodePath("CrouchRaycast")
+_squishRaycastLeft = NodePath("SquishRaycastRight")
+_squishRaycastRight = NodePath("SquishRaycastLeft")
 
 [node name="CrouchRaycast" type="RayCast2D" parent="Raycasts"]
 target_position = Vector2(0, -8)
+
+[node name="SquishRaycastRight" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0.5, 0)
+target_position = Vector2(3, 0)
+
+[node name="SquishRaycastLeft" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0.5, 0)
+target_position = Vector2(-3, 0)
 
 [node name="SquishArea" type="Area2D" parent="."]
 
