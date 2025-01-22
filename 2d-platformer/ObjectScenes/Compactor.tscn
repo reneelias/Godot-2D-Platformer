@@ -1,27 +1,64 @@
-[gd_scene load_steps=6 format=3 uid="uid://biuvghtgdv7sj"]
+[gd_scene load_steps=9 format=3 uid="uid://biuvghtgdv7sj"]
 
 [ext_resource type="Texture2D" uid="uid://v1eh883jwpk8" path="res://Sprites/Compactor.png" id="1_6w4xo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vet0u"]
 atlas = ExtResource("1_6w4xo")
-region = Rect2(118, 10, 35, 71)
+region = Rect2(117, 9, 37, 73)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i51a0"]
 size = Vector2(35, 71)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6w4xo"]
 atlas = ExtResource("1_6w4xo")
-region = Rect2(53, 14, 53, 64)
+region = Rect2(52, 13, 55, 66)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i51a0"]
 atlas = ExtResource("1_6w4xo")
-region = Rect2(6, 8, 30, 80)
+region = Rect2(5, 7, 32, 82)
+
+[sub_resource type="Animation" id="Animation_6w4xo"]
+resource_name = "Compact"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weight_Rigidbody:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(9, 0), Vector2(40, 0), Vector2(9, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vet0u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weight_Rigidbody:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(9, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i51a0"]
+_data = {
+&"Compact": SubResource("Animation_6w4xo"),
+&"RESET": SubResource("Animation_vet0u")
+}
 
 [node name="Compactor" type="Node2D"]
 
 [node name="Weight_Rigidbody" type="StaticBody2D" parent="."]
 z_index = 4
-position = Vector2(19, 0)
+position = Vector2(9, 0)
 
 [node name="Weight_Sprite" type="Sprite2D" parent="Weight_Rigidbody"]
 texture = SubResource("AtlasTexture_vet0u")
@@ -35,3 +72,9 @@ texture = SubResource("AtlasTexture_6w4xo")
 [node name="Machine_Sprite" type="Sprite2D" parent="."]
 position = Vector2(-41, 5)
 texture = SubResource("AtlasTexture_i51a0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_i51a0")
+}
+autoplay = "Compact"
