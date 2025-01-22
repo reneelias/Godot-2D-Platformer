@@ -4,6 +4,7 @@ class_name CharacterController
 @export_group("References")
 @export var sprite2D : Sprite2D
 @export var animPlayer : AnimationPlayer
+@export var crouchRaycast : RayCast2D
 
 @export_category("Movement Physics")
 @export var gravityScale := 9.81
@@ -29,13 +30,15 @@ var startPos : Vector2
 ## Modifier for slideFrictionMod. This is used to increase the slide friction over time.
 var slideFrictionModMod := 1.0
 @export var crouchSpeedThreshold := 25.0
+var inputVelocity := Vector2.ZERO
+
 @export_category("Wall Jumping")
 @export var wallJumpSpeed := 200.0
 @export var wallHugSpeed := 100.0
 @export var wallCoyoteFrames := 5
 @export var wallJumpAngle := 50.0
 var wallCoyoteFramesCount := 0
-var inputVelocity := Vector2.ZERO
+
 
 enum PlayerMode{
 	PLAYING,
@@ -83,7 +86,7 @@ func _physics_process(delta):
 			pass
 
 func updatePlayerState():
-	if Input.is_action_pressed("Down"):
+	if Input.is_action_pressed("Down") or ((playerState == PlayerState.CROUCHED or playerState == PlayerState.SLIDING) and crouchRaycast.is_colliding()):
 		if abs(velocity.x) < crouchSpeedThreshold:
 			setPlayerState(PlayerState.CROUCHED)
 		else:
@@ -133,6 +136,7 @@ func movement():
 	if Input.is_key_pressed(KEY_R):
 		global_position = startPos
 		velocity = Vector2.ZERO
+
 	
 	move_and_slide()
 

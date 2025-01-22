@@ -413,10 +413,11 @@ _data = {
 &"WallJump": SubResource("Animation_xb0pv")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite2D", "animPlayer")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite2D", "animPlayer", "crouchRaycast")]
 script = ExtResource("1_tryvm")
 sprite2D = NodePath("Sprite2D")
 animPlayer = NodePath("AnimationPlayer")
+crouchRaycast = NodePath("Raycasts/CrouchRaycast")
 jumpSpeed = 80.0
 frictionSpeedRetention = 0.785
 inAirDamp = 0.95
@@ -454,3 +455,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_wpivi")
 }
 autoplay = "Idle"
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="CrouchRaycast" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(0, -8)
