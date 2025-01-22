@@ -36,7 +36,6 @@ var slideFrictionModMod := 1.0
 @export var wallJumpAngle := 50.0
 var wallCoyoteFramesCount := 0
 var inputVelocity := Vector2.ZERO
-var touchingWall := false
 
 enum PlayerMode{
 	PLAYING,
@@ -117,7 +116,6 @@ func movement():
 	
 	if inputVelocity.x != 0 and velocity.x != 0 and abs(inputVelocity.x)/inputVelocity.x != abs(velocity.x)/velocity.x and is_on_floor():
 		velocity.x = moveSpeed * Input.get_axis("MoveLeft", "MoveRight") * (inAirDamp if (not is_on_floor()) else 1.0) * turnSpeedScaler
-		# velocity.x *= turnSpeedScaler
 	else:
 		velocity += inputVelocity
 
@@ -126,7 +124,6 @@ func movement():
 	
 	if inputVelocity.x != 0:
 		sprite2D.flip_h = inputVelocity.x < 0
-	
 
 	updateJump()
 			
@@ -149,8 +146,6 @@ func updateJump():
 		wallCoyoteFramesCount = 0
 	elif wallCoyoteFramesCount < wallCoyoteFrames:
 		wallCoyoteFramesCount += 1
-
-	touchingWall = is_on_wall()
 	
 	if Input.is_action_just_pressed("Jump"):
 		if (is_on_floor() or coyoteFramesCount < coyoteFrames) and playerState != PlayerState.JUMP:
