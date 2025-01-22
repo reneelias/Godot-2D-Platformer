@@ -467,7 +467,7 @@ tile_set = SubResource("TileSet_tf658")
 
 [node name="Player" parent="." instance=ExtResource("5_egvei")]
 z_index = 5
-position = Vector2(-29, 8)
+position = Vector2(817, 8)
 turnSpeedScaler = 0.1
 playerState = 0
 
@@ -583,9 +583,9 @@ scale = Vector2(0.992188, 1.89844)
 [node name="DustParticles_00" type="CPUParticles2D" parent="DustParticles"]
 position = Vector2(619, -35)
 amount = 15
-texture = SubResource("AtlasTexture_ca1sy")
 lifetime = 5.0
 lifetime_randomness = 0.25
+texture = SubResource("AtlasTexture_ca1sy")
 emission_shape = 3
 emission_rect_extents = Vector2(1000, 40)
 spread = 180.0
@@ -606,9 +606,9 @@ hue_variation_max = 0.31
 [node name="DustParticles_01" type="CPUParticles2D" parent="DustParticles"]
 position = Vector2(619, -35)
 amount = 15
-texture = SubResource("AtlasTexture_82yn4")
 lifetime = 5.0
 lifetime_randomness = 0.25
+texture = SubResource("AtlasTexture_82yn4")
 emission_shape = 3
 emission_rect_extents = Vector2(1000, 40)
 spread = 180.0
@@ -629,9 +629,9 @@ hue_variation_max = 0.31
 [node name="DustParticles_02" type="CPUParticles2D" parent="DustParticles"]
 position = Vector2(619, -35)
 amount = 15
-texture = SubResource("AtlasTexture_ca1sy")
 lifetime = 5.0
 lifetime_randomness = 0.25
+texture = SubResource("AtlasTexture_ca1sy")
 emission_shape = 3
 emission_rect_extents = Vector2(1000, 40)
 spread = 180.0
@@ -652,9 +652,9 @@ hue_variation_max = 0.31
 [node name="DustParticles_03" type="CPUParticles2D" parent="DustParticles"]
 position = Vector2(619, -35)
 amount = 15
-texture = SubResource("AtlasTexture_82yn4")
 lifetime = 5.0
 lifetime_randomness = 0.25
+texture = SubResource("AtlasTexture_82yn4")
 emission_shape = 3
 emission_rect_extents = Vector2(1000, 40)
 spread = 180.0
@@ -699,27 +699,39 @@ texture = ExtResource("14_cnu50")
 z_index = -110
 position = Vector2(851, -97)
 amount = 200
-texture = SubResource("GradientTexture1D_tmab6")
 visibility_rect = Rect2(-500, -100, 1000, 200)
 draw_order = 0
+texture = SubResource("GradientTexture1D_tmab6")
 process_material = SubResource("ParticleProcessMaterial_mm5uc")
 
 [node name="Rain_Background" type="GPUParticles2D" parent="Rain"]
 z_index = -110
 position = Vector2(851, -97)
 amount = 200
-texture = SubResource("GradientTexture1D_mm5uc")
 lifetime = 1.5
 visibility_rect = Rect2(-500, -100, 1000, 200)
 draw_order = 0
+texture = SubResource("GradientTexture1D_mm5uc")
 process_material = SubResource("ParticleProcessMaterial_cnu50")
 
 [node name="Compactor_00" parent="." instance=ExtResource("15_tmab6")]
-position = Vector2(1096, -30)
+position = Vector2(1209, -30)
+
+[node name="Hydraulics_Sprite" parent="Compactor_00" index="1"]
+modulate = Color(0.515688, 0.544407, 0.74931, 1)
+
+[node name="Machine_Sprite" parent="Compactor_00" index="2"]
+modulate = Color(0.515688, 0.544407, 0.74931, 1)
 
 [node name="Compactor_01" parent="." instance=ExtResource("15_tmab6")]
-position = Vector2(1210, -30)
+position = Vector2(1325, -30)
 scale = Vector2(-1, 1)
+
+[node name="Hydraulics_Sprite" parent="Compactor_01" index="1"]
+modulate = Color(0.515688, 0.544407, 0.74931, 1)
+
+[node name="Machine_Sprite" parent="Compactor_01" index="2"]
+modulate = Color(0.515688, 0.544407, 0.74931, 1)
 
 [editable path="Lights/LongHangingLamp_02"]
 [editable path="Lights/LongHangingLamp_03"]
@@ -730,3 +742,5 @@ scale = Vector2(-1, 1)
 [editable path="Lights/LongHangingLamp_08"]
 [editable path="Lights/LongHangingLamp_10"]
 [editable path="Lights/LongHangingLamp_09"]
+[editable path="Compactor_00"]
+[editable path="Compactor_01"]
