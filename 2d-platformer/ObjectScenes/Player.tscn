@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ccwmsb5ujo4ku"]
+[gd_scene load_steps=20 format=3 uid="uid://ccwmsb5ujo4ku"]
 
 [ext_resource type="Script" uid="uid://c71maiyhaww64" path="res://Scripts/CharacterController.gd" id="1_tryvm"]
 [ext_resource type="Script" uid="uid://c43q83dh0qpt7" path="res://Scripts/CameraController.gd" id="3_5podq"]
@@ -413,6 +413,9 @@ _data = {
 &"WallJump": SubResource("Animation_xb0pv")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpivi"]
+size = Vector2(4, 9)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite2D", "animPlayer", "crouchRaycast")]
 script = ExtResource("1_tryvm")
 sprite2D = NodePath("Sprite2D")
@@ -460,3 +463,11 @@ autoplay = "Idle"
 
 [node name="CrouchRaycast" type="RayCast2D" parent="Raycasts"]
 target_position = Vector2(0, -8)
+
+[node name="SquishArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SquishArea"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_wpivi")
+
+[connection signal="body_entered" from="SquishArea" to="." method="squishBodyEntered"]

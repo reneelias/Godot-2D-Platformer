@@ -176,3 +176,9 @@ func setPlayerState(state : PlayerState, animName : String = ""):
 		animPlayer.play(animName)
 	else:
 		animPlayer.play(playerStateAnimDict[state])
+
+func squishBodyEntered(body):
+	if playerState != PlayerState.CROUCHED and playerState != PlayerState.SLIDING and body.name != "Player":
+		print(body.name)
+		velocity = Vector2.ZERO
+		global_position = startPos
