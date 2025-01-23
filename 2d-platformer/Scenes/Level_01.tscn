@@ -469,6 +469,7 @@ tile_set = SubResource("TileSet_tf658")
 z_index = 5
 position = Vector2(1146, 10)
 turnSpeedScaler = 0.1
+deathTime = 0.5
 playerState = 0
 
 [node name="BrighteningLight" type="DirectionalLight2D" parent="."]

@@ -39,7 +39,11 @@ var inputVelocity := Vector2.ZERO
 @export var wallJumpAngle := 50.0
 var wallCoyoteFramesCount := 0
 
+@export_category("Death")
+@export var deathTime := 1.0
 
+
+@export_category("Player State")
 enum PlayerMode{
 	PLAYING,
 	CINEMATIC,
@@ -55,7 +59,8 @@ enum PlayerState {
 	FALL,
 	WALL_HUG,
 	CROUCHED,
-	SLIDING
+	SLIDING,
+	DEATH
 }
 @export var playerState := PlayerState.IDLE
 
@@ -79,14 +84,21 @@ func _ready():
 func _physics_process(delta):
 	match playerMode:
 		PlayerMode.PLAYING:
-			movement()
-			updatePlayerState()
+			_updatePlaying(delta)
 		PlayerMode.CINEMATIC:
 			pass
 		PlayerMode.DIALOGUE:
 			pass
 
-func updatePlayerState():
+func _updatePlaying(delta):
+	match playerState:
+		PlayerState.DEATH:
+			_updateDeath()
+		_:
+			_movement()
+			_updatePlayerState()
+
+func _updatePlayerState():
 	if Input.is_action_pressed("Down") or ((playerState == PlayerState.CROUCHED or playerState == PlayerState.SLIDING) and raycasts.crouchRaycastCollision):
 		if abs(velocity.x) < crouchSpeedThreshold:
 			setPlayerState(PlayerState.CROUCHED)
@@ -106,7 +118,7 @@ func updatePlayerState():
 	elif not is_on_floor() and velocity.y > wallHugSpeed - 1 and (playerState != PlayerState.WALL_HUG or (playerState == PlayerState.WALL_HUG and !is_on_wall())):
 		setPlayerState(PlayerState.FALL)
 
-func movement():
+func _movement():
 	velocity += Vector2(0, gravityScale)
 	inputVelocity = Vector2.ZERO
 
@@ -129,7 +141,7 @@ func movement():
 	if inputVelocity.x != 0:
 		sprite2D.flip_h = inputVelocity.x < 0
 
-	updateJump()
+	_updateJump()
 			
 	if playerState == PlayerState.WALL_HUG and velocity.y > 0:
 		velocity.y = min(velocity.y, wallHugSpeed)
@@ -140,7 +152,7 @@ func movement():
 
 	move_and_slide()
 
-func updateJump():
+func _updateJump():
 	if is_on_floor():
 		coyoteFramesCount = 0
 	elif coyoteFramesCount < coyoteFrames:
@@ -180,8 +192,7 @@ func setPlayerState(state : PlayerState, animName : String = ""):
 func squishBodyEntered(body):
 	if playerState != PlayerState.CROUCHED and playerState != PlayerState.SLIDING and body.name != "Player":
 		print(body.name)
-		velocity = Vector2.ZERO
-		global_position = startPos
+		death()
 
 func horizontalSquish():
 	return
@@ -189,3 +200,20 @@ func horizontalSquish():
 		print("squish")
 		velocity = Vector2.ZERO
 		global_position = startPos
+
+func death():
+	setPlayerState(PlayerState.DEATH, "Fall")
+	animPlayer.speed_scale = 0.0
+	velocity = Vector2.ZERO
+	sprite2D.modulate = Color.RED
+
+	await get_tree().create_timer(deathTime).timeout
+	global_position = startPos
+	setPlayerState(PlayerState.IDLE)
+	animPlayer.speed_scale = 1.0
+	sprite2D.modulate = Color.WHITE
+	rotation = 0
+
+func _updateDeath():
+	pass
+	# rotate(deg_to_rad(5))

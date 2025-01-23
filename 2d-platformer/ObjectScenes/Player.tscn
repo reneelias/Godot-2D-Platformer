@@ -415,13 +415,12 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpivi"]
-size = Vector2(4, 9)
+size = Vector2(4, 10)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite2D", "animPlayer", "crouchRaycast", "raycasts")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite2D", "animPlayer", "raycasts")]
 script = ExtResource("1_tryvm")
 sprite2D = NodePath("Sprite2D")
 animPlayer = NodePath("AnimationPlayer")
-crouchRaycast = NodePath("Raycasts/CrouchRaycast")
 raycasts = NodePath("Raycasts")
 jumpSpeed = 80.0
 frictionSpeedRetention = 0.785
@@ -432,6 +431,7 @@ maxVelX = 100.0
 jumpSpeedScaler = 0.375
 wallJumpSpeed = 150.0
 wallCoyoteFrames = 10
+deathTime = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_akhjb")
