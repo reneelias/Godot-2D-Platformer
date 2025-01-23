@@ -184,22 +184,22 @@ func _updateJump():
 
 func setPlayerState(state : PlayerState, animName : String = ""):
 	playerState = state
+	
 	if animName != "":
 		animPlayer.play(animName)
 	else:
 		animPlayer.play(playerStateAnimDict[state])
 
 func squishBodyEntered(body):
-	if playerState != PlayerState.CROUCHED and playerState != PlayerState.SLIDING and body.name != "Player":
+	if body.name != "Player":
 		print(body.name)
 		death()
 
 func horizontalSquish():
 	return
-	if playerState != PlayerState.CROUCHED and playerState != PlayerState.SLIDING:
-		print("squish")
-		velocity = Vector2.ZERO
-		global_position = startPos
+	print("squish")
+	velocity = Vector2.ZERO
+	global_position = startPos
 
 func death():
 	setPlayerState(PlayerState.DEATH, "Fall")
