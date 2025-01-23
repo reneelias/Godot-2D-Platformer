@@ -21,8 +21,8 @@ func _physics_process(delta):
     squishRaycastLeftCollision = _squishRaycastLeft.is_colliding()
     squishRaycastRightCollision = _squishRaycastRight.is_colliding()
 
-    if squishRaycastLeftCollision or squishRaycastRightCollision:
-        print("squishRaycastLeftCollision: ", squishRaycastLeftCollision)
-        print("squishRaycastRightCollision: ", squishRaycastRightCollision)
+    # if squishRaycastLeftCollision or squishRaycastRightCollision:
+    #     print("squishRaycastLeftCollision: ", squishRaycastLeftCollision)
+    #     print("squishRaycastRightCollision: ", squishRaycastRightCollision)
     if squishRaycastLeftCollision and squishRaycastRightCollision:
         emit_signal("horizontal_squish")

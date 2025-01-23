@@ -95,7 +95,7 @@ func _updatePlaying(delta):
 		PlayerState.DEATH:
 			_updateDeath()
 		_:
-			_movement()
+			_movement(delta)
 			_updatePlayerState()
 
 func _updatePlayerState():
@@ -118,7 +118,7 @@ func _updatePlayerState():
 	elif not is_on_floor() and velocity.y > wallHugSpeed - 1 and (playerState != PlayerState.WALL_HUG or (playerState == PlayerState.WALL_HUG and !is_on_wall())):
 		setPlayerState(PlayerState.FALL)
 
-func _movement():
+func _movement(delta):
 	velocity += Vector2(0, gravityScale)
 	inputVelocity = Vector2.ZERO
 
@@ -151,6 +151,15 @@ func _movement():
 		velocity = Vector2.ZERO
 
 	move_and_slide()
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+		if collision.get_collider().name == "Weight_Rigidbody":
+			var velVectX = Vector2(velocity.x, 0).normalized()
+			print("dot product: ", collision.get_collider_velocity().normalized().dot(velVectX))
+			if collision.get_collider_velocity().normalized().dot(velVectX) <= 0:
+				print("sliding with weight")
+				print(collision.get_collider_velocity())
+				position.x += collision.get_collider_velocity().x * delta
 
 func _updateJump():
 	if is_on_floor():
@@ -193,6 +202,7 @@ func setPlayerState(state : PlayerState, animName : String = ""):
 func squishBodyEntered(body):
 	if body.name != "Player":
 		print(body.name)
+		return
 		death()
 
 func horizontalSquish():
@@ -202,7 +212,8 @@ func horizontalSquish():
 	global_position = startPos
 
 func death():
-	setPlayerState(PlayerState.DEATH, "Fall")
+	# setPlayerState(PlayerState.DEATH, "Fall")
+	playerState = PlayerState.DEATH
 	animPlayer.speed_scale = 0.0
 	velocity = Vector2.ZERO
 	sprite2D.modulate = Color.RED
