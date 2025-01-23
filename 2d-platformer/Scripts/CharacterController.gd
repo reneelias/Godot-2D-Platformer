@@ -202,12 +202,10 @@ func setPlayerState(state : PlayerState, animName : String = ""):
 func squishBodyEntered(body):
 	if body.name != "Player":
 		print("squish body entered, ", body.name)
-		# return
 		death()
 
 func squishBodyExited(body):
-	if body.name != "Player":
-		print("squish body exited: ", body.name)
+	print("squish body exited: ", body.name)
 
 func horizontalSquish():
 	return
@@ -216,6 +214,8 @@ func horizontalSquish():
 	global_position = startPos
 
 func death():
+	if playerState == PlayerState.DEATH:
+		return
 	setPlayerState(PlayerState.DEATH, "Fall")
 	# playerState = PlayerState.DEATH
 	animPlayer.speed_scale = 0.0
@@ -228,6 +228,10 @@ func death():
 	animPlayer.speed_scale = 1.0
 	sprite2D.modulate = Color.WHITE
 	rotation = 0
+	for body in $SquishArea.get_overlapping_bodies():
+		print("overlapping body: ", body.name)
+	$SquishArea.reset_physics_interpolation()
+	$SquishArea.force_update_transform()
 
 func _updateDeath():
 	pass
