@@ -701,3 +701,4 @@ position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_wpivi")
 
 [connection signal="body_entered" from="SquishArea" to="." method="squishBodyEntered"]
+[connection signal="body_exited" from="SquishArea" to="." method="squishBodyExited"]

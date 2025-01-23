@@ -158,8 +158,8 @@ func _movement(delta):
 			print("dot product: ", collision.get_collider_velocity().normalized().dot(velVectX))
 			if collision.get_collider_velocity().normalized().dot(velVectX) <= 0:
 				print("sliding with weight")
-				print(collision.get_collider_velocity())
-				position.x += collision.get_collider_velocity().x * delta
+				# print(collision.get_collider_velocity())
+				# position.x += collision.get_collider_velocity().x * delta
 
 func _updateJump():
 	if is_on_floor():
@@ -201,9 +201,13 @@ func setPlayerState(state : PlayerState, animName : String = ""):
 
 func squishBodyEntered(body):
 	if body.name != "Player":
-		print(body.name)
-		return
+		print("squish body entered, ", body.name)
+		# return
 		death()
+
+func squishBodyExited(body):
+	if body.name != "Player":
+		print("squish body exited: ", body.name)
 
 func horizontalSquish():
 	return
@@ -212,8 +216,8 @@ func horizontalSquish():
 	global_position = startPos
 
 func death():
-	# setPlayerState(PlayerState.DEATH, "Fall")
-	playerState = PlayerState.DEATH
+	setPlayerState(PlayerState.DEATH, "Fall")
+	# playerState = PlayerState.DEATH
 	animPlayer.speed_scale = 0.0
 	velocity = Vector2.ZERO
 	sprite2D.modulate = Color.RED
