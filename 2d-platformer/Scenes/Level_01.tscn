@@ -422,7 +422,7 @@ scale_max = 0.4
 
 [node name="Player" parent="." instance=ExtResource("5_egvei")]
 z_index = 5
-position = Vector2(830, 8)
+position = Vector2(1075, 6)
 turnSpeedScaler = 0.1
 playerState = 0
 
@@ -727,23 +727,26 @@ visibility_rect = Rect2(-500, -100, 1000, 200)
 draw_order = 0
 process_material = SubResource("ParticleProcessMaterial_cnu50")
 
-[node name="Compactor_00" parent="." instance=ExtResource("15_tmab6")]
+[node name="Compactors" type="Node2D" parent="."]
+
+[node name="Compactor_00" parent="Compactors" instance=ExtResource("15_tmab6")]
 position = Vector2(1198, -30)
 
-[node name="Hydraulics_Sprite" parent="Compactor_00" index="1"]
+[node name="Hydraulics_Sprite" parent="Compactors/Compactor_00" index="1"]
 modulate = Color(0.515688, 0.544407, 0.74931, 1)
 
-[node name="Machine_Sprite" parent="Compactor_00" index="2"]
+[node name="Machine_Sprite" parent="Compactors/Compactor_00" index="2"]
 modulate = Color(0.515688, 0.544407, 0.74931, 1)
 
-[node name="Compactor_01" parent="." instance=ExtResource("15_tmab6")]
+[node name="Compactor_01" parent="Compactors" instance=ExtResource("15_tmab6")]
 position = Vector2(1314, -30)
-scale = Vector2(-1, 1)
+rotation = 3.14159
+scale = Vector2(1, -1)
 
-[node name="Hydraulics_Sprite" parent="Compactor_01" index="1"]
+[node name="Hydraulics_Sprite" parent="Compactors/Compactor_01" index="1"]
 modulate = Color(0.515688, 0.544407, 0.74931, 1)
 
-[node name="Machine_Sprite" parent="Compactor_01" index="2"]
+[node name="Machine_Sprite" parent="Compactors/Compactor_01" index="2"]
 modulate = Color(0.515688, 0.544407, 0.74931, 1)
 
 [editable path="Lights/LongHangingLamp_02"]
@@ -756,5 +759,5 @@ modulate = Color(0.515688, 0.544407, 0.74931, 1)
 [editable path="Lights/LongHangingLamp_10"]
 [editable path="Lights/LongHangingLamp_09"]
 [editable path="Lights/LongHangingLamp_11"]
-[editable path="Compactor_00"]
-[editable path="Compactor_01"]
+[editable path="Compactors/Compactor_00"]
+[editable path="Compactors/Compactor_01"]
