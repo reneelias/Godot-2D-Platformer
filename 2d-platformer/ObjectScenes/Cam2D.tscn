@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://da0ertkrhq327"]
+
+[ext_resource type="Script" uid="uid://c43q83dh0qpt7" path="res://Scripts/CameraController.gd" id="1_en27i"]
+[ext_resource type="Shader" uid="uid://ek88p73cly8c" path="res://Shaders/ChromaticAberration.gdshader" id="2_tfviw"]
+[ext_resource type="Texture2D" uid="uid://dmdlgegia3xjr" path="res://Sprites/Wall.png" id="3_gwgcp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1gky5"]
+shader = ExtResource("2_tfviw")
+shader_parameter/offset = 1.5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpivi"]
+atlas = ExtResource("3_gwgcp")
+region = Rect2(80, 0, 16, 16)
+
+[node name="Camera2D" type="Camera2D"]
+zoom = Vector2(4, 4)
+script = ExtResource("1_en27i")
+
+[node name="ChromaticAberration" type="TextureRect" parent="."]
+z_index = 100
+material = SubResource("ShaderMaterial_1gky5")
+offset_left = -144.0
+offset_top = -81.0
+offset_right = 144.0
+offset_bottom = 81.0
+texture = SubResource("AtlasTexture_wpivi")

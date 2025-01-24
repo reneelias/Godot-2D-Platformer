@@ -1,6 +1,7 @@
-[gd_scene load_steps=35 format=4 uid="uid://c50oapyik8qtr"]
+[gd_scene load_steps=36 format=4 uid="uid://c50oapyik8qtr"]
 
 [ext_resource type="Texture2D" uid="uid://ds06l1jfhigal" path="res://Sprites/Tiles.png" id="1_e0dve"]
+[ext_resource type="PackedScene" uid="uid://da0ertkrhq327" path="res://ObjectScenes/Cam2D.tscn" id="1_mm5uc"]
 [ext_resource type="Texture2D" uid="uid://lsi2svo66upj" path="res://Sprites/Scenery.png" id="2_egvei"]
 [ext_resource type="Texture2D" uid="uid://b2t25v0wemtn3" path="res://Sprites/Brick.png" id="3_48sdu"]
 [ext_resource type="Texture2D" uid="uid://dmdlgegia3xjr" path="res://Sprites/Wall.png" id="4_fmco7"]
@@ -419,6 +420,9 @@ scale_max = 0.4
 
 [node name="Level_01" type="Node2D"]
 
+[node name="Camera2D" parent="." node_paths=PackedStringArray("objectToFollow") instance=ExtResource("1_mm5uc")]
+objectToFollow = NodePath("../Player")
+
 [node name="TileMapLayers" type="Node2D" parent="."]
 
 [node name="Platforms" type="TileMapLayer" parent="TileMapLayers"]
@@ -467,7 +471,7 @@ tile_set = SubResource("TileSet_tf658")
 
 [node name="Player" parent="." instance=ExtResource("5_egvei")]
 z_index = 5
-position = Vector2(1146, 10)
+position = Vector2(-29, 8)
 turnSpeedScaler = 0.1
 playerState = 0
 
@@ -583,9 +587,9 @@ scale = Vector2(0.992188, 1.89844)
 [node name="DustParticles_00" type="CPUParticles2D" parent="DustParticles"]
 position = Vector2(619, -35)
 amount = 15
+texture = SubResource("AtlasTexture_ca1sy")
 lifetime = 5.0
 lifetime_randomness = 0.25
-texture = SubResource("AtlasTexture_ca1sy")
 emission_shape = 3
 emission_rect_extents = Vector2(1000, 40)
 spread = 180.0
@@ -606,9 +610,9 @@ hue_variation_max = 0.31
 [node name="DustParticles_01" type="CPUParticles2D" parent="DustParticles"]
 position = Vector2(619, -35)
 amount = 15
+texture = SubResource("AtlasTexture_82yn4")
 lifetime = 5.0
 lifetime_randomness = 0.25
-texture = SubResource("AtlasTexture_82yn4")
 emission_shape = 3
 emission_rect_extents = Vector2(1000, 40)
 spread = 180.0
@@ -629,9 +633,9 @@ hue_variation_max = 0.31
 [node name="DustParticles_02" type="CPUParticles2D" parent="DustParticles"]
 position = Vector2(619, -35)
 amount = 15
+texture = SubResource("AtlasTexture_ca1sy")
 lifetime = 5.0
 lifetime_randomness = 0.25
-texture = SubResource("AtlasTexture_ca1sy")
 emission_shape = 3
 emission_rect_extents = Vector2(1000, 40)
 spread = 180.0
@@ -652,9 +656,9 @@ hue_variation_max = 0.31
 [node name="DustParticles_03" type="CPUParticles2D" parent="DustParticles"]
 position = Vector2(619, -35)
 amount = 15
+texture = SubResource("AtlasTexture_82yn4")
 lifetime = 5.0
 lifetime_randomness = 0.25
-texture = SubResource("AtlasTexture_82yn4")
 emission_shape = 3
 emission_rect_extents = Vector2(1000, 40)
 spread = 180.0
@@ -699,19 +703,19 @@ texture = ExtResource("14_cnu50")
 z_index = -110
 position = Vector2(851, -97)
 amount = 200
+texture = SubResource("GradientTexture1D_tmab6")
 visibility_rect = Rect2(-500, -100, 1000, 200)
 draw_order = 0
-texture = SubResource("GradientTexture1D_tmab6")
 process_material = SubResource("ParticleProcessMaterial_mm5uc")
 
 [node name="Rain_Background" type="GPUParticles2D" parent="Rain"]
 z_index = -110
 position = Vector2(851, -97)
 amount = 200
+texture = SubResource("GradientTexture1D_mm5uc")
 lifetime = 1.5
 visibility_rect = Rect2(-500, -100, 1000, 200)
 draw_order = 0
-texture = SubResource("GradientTexture1D_mm5uc")
 process_material = SubResource("ParticleProcessMaterial_cnu50")
 
 [node name="Compactor_00" parent="." instance=ExtResource("15_tmab6")]
