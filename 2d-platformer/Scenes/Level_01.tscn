@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://c50oapyik8qtr"]
+[gd_scene load_steps=38 format=4 uid="uid://c50oapyik8qtr"]
 
 [ext_resource type="Texture2D" uid="uid://ds06l1jfhigal" path="res://Sprites/Tiles.png" id="1_e0dve"]
 [ext_resource type="PackedScene" uid="uid://da0ertkrhq327" path="res://ObjectScenes/Cam2D.tscn" id="1_mm5uc"]
@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://d362ldpb1x223" path="res://Sprites/NightSky_NoDither.png" id="13_cnu50"]
 [ext_resource type="Texture2D" uid="uid://c0tcs55ux5og6" path="res://Sprites/Buildings_Far.png" id="14_cnu50"]
 [ext_resource type="PackedScene" uid="uid://ct476bf3ca1wm" path="res://ObjectScenes/CompactorGroup.tscn" id="16_mm5uc"]
+[ext_resource type="PackedScene" uid="uid://b8ubtijxmpikm" path="res://ObjectScenes/Forklift.tscn" id="17_ob0u7"]
+[ext_resource type="PackedScene" uid="uid://c2wlrydy2amq1" path="res://ObjectScenes/Crate.tscn" id="18_nhi4p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2jryf"]
 texture = ExtResource("1_e0dve")
@@ -422,7 +424,7 @@ scale_max = 0.4
 
 [node name="Player" parent="." instance=ExtResource("5_egvei")]
 z_index = 5
-position = Vector2(1079, 8)
+position = Vector2(1433, -76)
 turnSpeedScaler = 0.1
 playerState = 0
 
@@ -730,6 +732,35 @@ process_material = SubResource("ParticleProcessMaterial_cnu50")
 [node name="Compactors" parent="." instance=ExtResource("16_mm5uc")]
 position = Vector2(196, 0)
 
+[node name="Forklifts" type="Node2D" parent="."]
+
+[node name="Forklift_00" parent="Forklifts" instance=ExtResource("17_ob0u7")]
+modulate = Color(0.372549, 0.396078, 0.603922, 1)
+position = Vector2(1143, 0)
+
+[node name="Lift" parent="Forklifts/Forklift_00" index="1"]
+position = Vector2(0, 2.5)
+
+[node name="Crates" type="Node2D" parent="."]
+
+[node name="Crate_00" parent="Crates" instance=ExtResource("18_nhi4p")]
+position = Vector2(1143, -1)
+
+[node name="Crate_01" parent="Crates" instance=ExtResource("18_nhi4p")]
+position = Vector2(1143, -17)
+
+[node name="Sprite2D" parent="Crates/Crate_01" index="0"]
+frame = 5
+
+[node name="Crate_02" parent="Crates" instance=ExtResource("18_nhi4p")]
+position = Vector2(1143, -33)
+
+[node name="Sprite2D" parent="Crates/Crate_02" index="0"]
+frame = 6
+
+[node name="Crate_03" parent="Crates" instance=ExtResource("18_nhi4p")]
+position = Vector2(1143, -49)
+
 [editable path="Lights/LongHangingLamp_02"]
 [editable path="Lights/LongHangingLamp_03"]
 [editable path="Lights/LongHangingLamp_04"]
@@ -740,3 +771,6 @@ position = Vector2(196, 0)
 [editable path="Lights/LongHangingLamp_10"]
 [editable path="Lights/LongHangingLamp_09"]
 [editable path="Lights/LongHangingLamp_11"]
+[editable path="Forklifts/Forklift_00"]
+[editable path="Crates/Crate_01"]
+[editable path="Crates/Crate_02"]
