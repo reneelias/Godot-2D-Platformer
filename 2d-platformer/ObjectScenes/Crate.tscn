@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2wlrydy2amq1"]
+
+[ext_resource type="Texture2D" uid="uid://lsi2svo66upj" path="res://Sprites/Scenery.png" id="1_vn4d6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ay7ed"]
+size = Vector2(16, 16)
+
+[node name="Crate" type="RigidBody2D"]
+freeze = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vn4d6")
+hframes = 7
+frame = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ay7ed")
