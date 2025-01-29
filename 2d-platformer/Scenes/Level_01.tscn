@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dr77g4kvj06hb" path="res://Sprites/Particles.png" id="9_82yn4"]
 [ext_resource type="Texture2D" uid="uid://d362ldpb1x223" path="res://Sprites/NightSky_NoDither.png" id="13_cnu50"]
 [ext_resource type="Texture2D" uid="uid://c0tcs55ux5og6" path="res://Sprites/Buildings_Far.png" id="14_cnu50"]
-[ext_resource type="PackedScene" uid="uid://biuvghtgdv7sj" path="res://ObjectScenes/Compactor.tscn" id="15_tmab6"]
+[ext_resource type="PackedScene" uid="uid://ct476bf3ca1wm" path="res://ObjectScenes/CompactorGroup.tscn" id="16_mm5uc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2jryf"]
 texture = ExtResource("1_e0dve")
@@ -727,27 +727,8 @@ visibility_rect = Rect2(-500, -100, 1000, 200)
 draw_order = 0
 process_material = SubResource("ParticleProcessMaterial_cnu50")
 
-[node name="Compactors" type="Node2D" parent="."]
-
-[node name="Compactor_00" parent="Compactors" instance=ExtResource("15_tmab6")]
-position = Vector2(1198, -30)
-
-[node name="Hydraulics_Sprite" parent="Compactors/Compactor_00" index="1"]
-modulate = Color(0.515688, 0.544407, 0.74931, 1)
-
-[node name="Machine_Sprite" parent="Compactors/Compactor_00" index="2"]
-modulate = Color(0.515688, 0.544407, 0.74931, 1)
-
-[node name="Compactor_01" parent="Compactors" instance=ExtResource("15_tmab6")]
-position = Vector2(1314, -30)
-rotation = 3.14159
-scale = Vector2(1, -1)
-
-[node name="Hydraulics_Sprite" parent="Compactors/Compactor_01" index="1"]
-modulate = Color(0.515688, 0.544407, 0.74931, 1)
-
-[node name="Machine_Sprite" parent="Compactors/Compactor_01" index="2"]
-modulate = Color(0.515688, 0.544407, 0.74931, 1)
+[node name="Compactors" parent="." instance=ExtResource("16_mm5uc")]
+position = Vector2(196, 0)
 
 [editable path="Lights/LongHangingLamp_02"]
 [editable path="Lights/LongHangingLamp_03"]
@@ -759,5 +740,3 @@ modulate = Color(0.515688, 0.544407, 0.74931, 1)
 [editable path="Lights/LongHangingLamp_10"]
 [editable path="Lights/LongHangingLamp_09"]
 [editable path="Lights/LongHangingLamp_11"]
-[editable path="Compactors/Compactor_00"]
-[editable path="Compactors/Compactor_01"]
