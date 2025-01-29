@@ -202,6 +202,9 @@ func horizontalSquish():
 	global_position = startPos
 
 func death():
+	if playerState == PlayerState.DEATH:
+		return
+
 	setPlayerState(PlayerState.DEATH, "Fall")
 	animPlayer.speed_scale = 0.0
 	velocity = Vector2.ZERO
