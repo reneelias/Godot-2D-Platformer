@@ -12,7 +12,8 @@ class_name CharacterController
 @export var jumpSpeed := 100.0
 ## The higher the number, the less friction affects the player
 @export var frictionSpeedRetention := .25
-@export var inAirDamp := .5
+## Ratio of speed when player is in the air compared to when on the ground
+@export var inAirSpeedScale := .5
 @export var jumpSpeedFrames := 10
 ## How much velocity scaled down by when turning
 @export var turnSpeedScaler := .5
@@ -25,14 +26,21 @@ var coyoteFramesCount := 0
 var startPos : Vector2
 ## Used for scaling extended jump frames speed
 @export var jumpSpeedScaler := .125
-## Used to decrease friction when the player is sliding
-@export var slideFrictionMod := 1.3
 ## Modifier for slideFrictionMod. This is used to increase the slide friction over time.
 var slideFrictionModMod := 1.0
-@export var crouchSpeedThreshold := 25.0
 var inputVelocity := Vector2.ZERO
 
-@export_category("Wall Jumping")
+@export_subgroup("Crouch and Slide")
+## Used to decrease friction when the player is sliding
+@export var slideFrictionMod := 1.3
+## The speed threshold for the player to crouch
+@export var crouchSpeedThreshold := 25.0
+## The movement speed scaler for the player when crouching
+@export var crouchSpeedScaler := .125
+## The jump speed scaler for the player when crouching
+@export var crouchJumpScaler := .25
+
+@export_subgroup("Wall Jumping")
 @export var wallJumpSpeed := 200.0
 @export var wallHugSpeed := 100.0
 @export var wallCoyoteFrames := 5
@@ -124,14 +132,20 @@ func _movement():
 
 	var moveSpeedVec := Vector2(moveSpeed, 0)
 	
-	if playerState != PlayerState.CROUCHED and playerState != PlayerState.SLIDING:
-		inputVelocity += moveSpeedVec * Input.get_axis("MoveLeft", "MoveRight") * (inAirDamp if (not is_on_floor()) else 1.0)
+	if playerState != PlayerState.SLIDING:
+		inputVelocity += moveSpeedVec * Input.get_axis("MoveLeft", "MoveRight") * (inAirSpeedScale if (not is_on_floor()) else 1.0)
+
+	if playerState == PlayerState.CROUCHED:
+		if !is_on_floor():
+			inputVelocity *= .125
+		else:
+			inputVelocity = Vector2.ZERO
 
 	if is_on_floor() and inputVelocity.length() == 0:
 		velocity.x *= frictionSpeedRetention * (1.0 if playerState != PlayerState.SLIDING else slideFrictionMod / slideFrictionModMod)
 	
 	if inputVelocity.x != 0 and velocity.x != 0 and abs(inputVelocity.x)/inputVelocity.x != abs(velocity.x)/velocity.x and is_on_floor():
-		velocity.x = moveSpeed * Input.get_axis("MoveLeft", "MoveRight") * (inAirDamp if (not is_on_floor()) else 1.0) * turnSpeedScaler
+		velocity.x = moveSpeed * Input.get_axis("MoveLeft", "MoveRight") * (inAirSpeedScale if (not is_on_floor()) else 1.0) * turnSpeedScaler
 	else:
 		velocity += inputVelocity
 
@@ -168,7 +182,8 @@ func _updateJump():
 			jumpSpeedFramesCount = 0
 			jumpSpeedFrames = JUMP_FRAMES
 			velocity -= Vector2(0, jumpSpeed)
-			setPlayerState(PlayerState.JUMP)
+			if playerState != PlayerState.CROUCHED:
+				setPlayerState(PlayerState.JUMP)
 		elif (is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x) or playerState == PlayerState.WALL_HUG or wallCoyoteFramesCount < wallCoyoteFrames:
 			jumpSpeedFramesCount = 0
 			jumpSpeedFrames = WALL_JUMP_FRAMES
@@ -178,9 +193,12 @@ func _updateJump():
 			velocity = wallJumpVec * wallJumpSpeed
 			wallCoyoteFramesCount = wallCoyoteFrames
 			setPlayerState(PlayerState.JUMP, "" if get_wall_normal().x == -inputVelocity.normalized().x  else "WallJump")
-	elif Input.is_action_pressed("Jump") and playerState == PlayerState.JUMP and jumpSpeedFramesCount < jumpSpeedFrames:
+	elif Input.is_action_pressed("Jump") and (playerState == PlayerState.JUMP or playerState == PlayerState.CROUCHED) and jumpSpeedFramesCount < jumpSpeedFrames:
 		jumpSpeedFramesCount += 1
-		velocity -= Vector2(0, jumpSpeed * jumpSpeedScaler * cos(float(jumpSpeedFramesCount)/jumpSpeedFrames * PI/2))
+		if playerState == PlayerState.CROUCHED and !Input.is_action_pressed("Down") and !raycasts.crouchRaycastCollision:
+			setPlayerState(PlayerState.JUMP)
+		var jumpSpeedScalerMod := crouchJumpScaler if playerState == PlayerState.CROUCHED else 1.0
+		velocity -= Vector2(0, jumpSpeed * jumpSpeedScaler * jumpSpeedScalerMod * cos(float(jumpSpeedFramesCount)/jumpSpeedFrames * PI/2))
 
 func setPlayerState(state : PlayerState, animName : String = ""):
 	playerState = state
