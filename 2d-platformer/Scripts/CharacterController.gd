@@ -235,6 +235,9 @@ func death():
 	sprite2D.modulate = Color.WHITE
 	rotation = 0
 
+func checkpointEntered(checkpoint):
+	startPos = global_position
+
 func _updateDeath():
 	pass
 	# rotate(deg_to_rad(5))

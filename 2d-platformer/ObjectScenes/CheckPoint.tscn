@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4vccwblyftcu"]
+
+[sub_resource type="Gradient" id="Gradient_avdlx"]
+offsets = PackedFloat32Array(0, 0.363636, 0.636364, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+metadata/_snap_count = 11
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i51ak"]
+gradient = SubResource("Gradient_avdlx")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_avdlx"]
+size = Vector2(59, 64)
+
+[node name="CheckPoint" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.915168, 0.475022, 0.700205, 0.678431)
+texture = SubResource("GradientTexture2D_i51ak")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_avdlx")
