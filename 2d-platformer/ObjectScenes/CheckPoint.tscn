@@ -26,5 +26,4 @@ texture = SubResource("GradientTexture2D_i51ak")
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_avdlx")
 
-[connection signal="area_entered" from="." to="." method="onAreaEntered"]
 [connection signal="body_entered" from="." to="." method="onBodyEntered"]

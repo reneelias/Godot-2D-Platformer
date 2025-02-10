@@ -796,7 +796,7 @@ frame = 5
 position = Vector2(1028, -79)
 
 [node name="Checkpoint_01" parent="Checkpoints" instance=ExtResource("19_nhi4p")]
-position = Vector2(1823, 7)
+position = Vector2(1824, -17)
 
 [editable path="Lights/LongHangingLamp_02"]
 [editable path="Lights/LongHangingLamp_03"]

@@ -238,7 +238,6 @@ func death():
 	rotation = 0
 
 func checkpointEntered(checkpoint : Node2D):
-	print("CharacterController: Checkpoint Entered")
 	if !currCheckpoint:
 		startPos = checkpoint.position
 		currCheckpoint = checkpoint
@@ -246,7 +245,7 @@ func checkpointEntered(checkpoint : Node2D):
 
 	var checkpointLastTwoChars = checkpoint.name.substr(checkpoint.name.length() - 2, 2)
 	var currCheckpointLastTwoChars = currCheckpoint.name.substr(currCheckpoint.name.length() - 2, 2)
-	if int(checkpointLastTwoChars) < int(currCheckpointLastTwoChars):
+	if int(checkpointLastTwoChars) > int(currCheckpointLastTwoChars):
 		startPos = checkpoint.position
 		currCheckpoint = checkpoint
 
