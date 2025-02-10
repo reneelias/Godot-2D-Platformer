@@ -50,6 +50,8 @@ var wallCoyoteFramesCount := 0
 @export_category("Death")
 @export var deathTime := 1.0
 
+var currCheckpoint : Node2D
+
 
 @export_category("Player State")
 enum PlayerMode{
@@ -235,8 +237,19 @@ func death():
 	sprite2D.modulate = Color.WHITE
 	rotation = 0
 
-func checkpointEntered(checkpoint):
-	startPos = global_position
+func checkpointEntered(checkpoint : Node2D):
+	print("CharacterController: Checkpoint Entered")
+	if !currCheckpoint:
+		startPos = checkpoint.position
+		currCheckpoint = checkpoint
+		return
+
+	var checkpointLastTwoChars = checkpoint.name.substr(checkpoint.name.length() - 2, 2)
+	var currCheckpointLastTwoChars = currCheckpoint.name.substr(currCheckpoint.name.length() - 2, 2)
+	if int(checkpointLastTwoChars) < int(currCheckpointLastTwoChars):
+		startPos = checkpoint.position
+		currCheckpoint = checkpoint
+
 
 func _updateDeath():
 	pass

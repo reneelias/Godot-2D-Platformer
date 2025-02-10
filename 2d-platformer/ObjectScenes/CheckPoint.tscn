@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4vccwblyftcu"]
+[gd_scene load_steps=5 format=3 uid="uid://b4vccwblyftcu"]
+
+[ext_resource type="Script" uid="uid://ds57kl5uuvqee" path="res://Scripts/Checkpoint.gd" id="1_i51ak"]
 
 [sub_resource type="Gradient" id="Gradient_avdlx"]
 offsets = PackedFloat32Array(0, 0.363636, 0.636364, 1)
@@ -12,7 +14,9 @@ gradient = SubResource("Gradient_avdlx")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_avdlx"]
 size = Vector2(59, 64)
 
-[node name="CheckPoint" type="Area2D"]
+[node name="Checkpoint" type="Area2D" groups=["CheckPoints"]]
+priority = 10
+script = ExtResource("1_i51ak")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.915168, 0.475022, 0.700205, 0.678431)
@@ -21,3 +25,6 @@ texture = SubResource("GradientTexture2D_i51ak")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_avdlx")
+
+[connection signal="area_entered" from="." to="." method="onAreaEntered"]
+[connection signal="body_entered" from="." to="." method="onBodyEntered"]

@@ -622,7 +622,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpivi"]
 size = Vector2(4, 10)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite2D", "animPlayer", "raycasts")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite2D", "animPlayer", "raycasts") groups=["Player"]]
 script = ExtResource("1_tryvm")
 sprite2D = NodePath("Sprite2D")
 animPlayer = NodePath("AnimationPlayer")

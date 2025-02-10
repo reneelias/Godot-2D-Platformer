@@ -29,6 +29,11 @@ folder_colors={
 "res://Sprites/": "blue"
 }
 
+[global_group]
+
+Player=""
+CheckPoints=""
+
 [input]
 
 Jump={

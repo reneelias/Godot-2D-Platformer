@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://c50oapyik8qtr"]
+[gd_scene load_steps=39 format=4 uid="uid://c50oapyik8qtr"]
 
 [ext_resource type="Texture2D" uid="uid://ds06l1jfhigal" path="res://Sprites/Tiles.png" id="1_e0dve"]
 [ext_resource type="PackedScene" uid="uid://da0ertkrhq327" path="res://ObjectScenes/Cam2D.tscn" id="1_mm5uc"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://ct476bf3ca1wm" path="res://ObjectScenes/CompactorGroup.tscn" id="16_mm5uc"]
 [ext_resource type="PackedScene" uid="uid://b8ubtijxmpikm" path="res://ObjectScenes/Forklift.tscn" id="17_ob0u7"]
 [ext_resource type="PackedScene" uid="uid://c2wlrydy2amq1" path="res://ObjectScenes/Crate.tscn" id="18_nhi4p"]
+[ext_resource type="PackedScene" uid="uid://b4vccwblyftcu" path="res://ObjectScenes/Checkpoint.tscn" id="19_nhi4p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2jryf"]
 texture = ExtResource("1_e0dve")
@@ -428,7 +429,7 @@ scale_max = 0.4
 
 [node name="Player" parent="." instance=ExtResource("5_egvei")]
 z_index = 5
-position = Vector2(-28, 7)
+position = Vector2(987, -76)
 turnSpeedScaler = 0.1
 playerState = 0
 
@@ -788,6 +789,14 @@ position = Vector2(1143, -65)
 
 [node name="Sprite2D" parent="Crates/Crate_04" index="0"]
 frame = 5
+
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="Checkpoint_00" parent="Checkpoints" instance=ExtResource("19_nhi4p")]
+position = Vector2(1028, -79)
+
+[node name="Checkpoint_01" parent="Checkpoints" instance=ExtResource("19_nhi4p")]
+position = Vector2(1823, 7)
 
 [editable path="Lights/LongHangingLamp_02"]
 [editable path="Lights/LongHangingLamp_03"]
