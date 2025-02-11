@@ -446,7 +446,6 @@ tile_set = SubResource("TileSet_82yn4")
 light_mask = 2
 z_index = 100
 texture_filter = 1
-tile_map_data = PackedByteArray("AAAXAPj/AwAFAAAAADAZAPj/AwAFAAAAACAbAPj/AwAFAAAAADAdAPj/AwAFAAAAACAlAPj/AwAFAAAAACAjAPj/AwAFAAAAADAfAPj/AwAFAAAAADAhAPj/AwAFAAAAACAqAPj/AwAFAAAAADAsAPj/AwAFAAAAACAuAPj/AwAFAAAAADAwAPj/AwAFAAAAACA6APj/AwAFAAAAABA8APj/AwAFAAAAAABAAPj/AwAFAAAAAAA+APj/AwAFAAAAABA0APj/AwAFAAAAABA2APj/AwAFAAAAAABOAPj/AwAFAAAAABBQAPj/AwAFAAAAAAA=")
 tile_set = SubResource("TileSet_tf658")
 
 [node name="Scenery_MidForeground" type="TileMapLayer" parent="TileMapLayers"]

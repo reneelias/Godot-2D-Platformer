@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cnffxmilq3e7k"]
+[gd_scene load_steps=7 format=3 uid="uid://cnffxmilq3e7k"]
 
 [ext_resource type="Texture2D" uid="uid://dop1yny2emhva" path="res://Sprites/Lights.png" id="1_dsf17"]
 [ext_resource type="Texture2D" uid="uid://cg2vjss0yay87" path="res://Sprites/PointLightTextures/PointLightTexture_07.png" id="2_o745o"]
@@ -8,7 +8,20 @@
 atlas = ExtResource("1_dsf17")
 region = Rect2(0, 0, 49, 16)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o745o"]
+texture = ExtResource("1_dsf17")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_yinab"]
+sources/0 = SubResource("TileSetAtlasSource_o745o")
+
 [node name="LongHangingLamp" type="Sprite2D"]
+z_index = 100
 texture = SubResource("AtlasTexture_m6f4h")
 script = ExtResource("2_yinab")
 
@@ -19,3 +32,8 @@ energy = 0.9
 range_z_min = -100
 range_z_max = 150
 texture = ExtResource("2_o745o")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(7.5, -8)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 5, 0, 0, 0, 0, 32, 254, 255, 255, 255, 0, 0, 5, 0, 0, 0, 0, 48)
+tile_set = SubResource("TileSet_yinab")
