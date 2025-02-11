@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://ct476bf3ca1wm" path="res://ObjectScenes/CompactorGroup.tscn" id="16_mm5uc"]
 [ext_resource type="PackedScene" uid="uid://b8ubtijxmpikm" path="res://ObjectScenes/Forklift.tscn" id="17_ob0u7"]
 [ext_resource type="PackedScene" uid="uid://c2wlrydy2amq1" path="res://ObjectScenes/Crate.tscn" id="18_nhi4p"]
-[ext_resource type="PackedScene" uid="uid://b4vccwblyftcu" path="res://ObjectScenes/Checkpoint.tscn" id="19_nhi4p"]
+[ext_resource type="PackedScene" uid="uid://b4vccwblyftcu" path="res://ObjectScenes/CheckPoint.tscn" id="19_nhi4p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2jryf"]
 texture = ExtResource("1_e0dve")
@@ -429,7 +429,7 @@ scale_max = 0.4
 
 [node name="Player" parent="." instance=ExtResource("5_egvei")]
 z_index = 5
-position = Vector2(987, -76)
+position = Vector2(-29, 9)
 turnSpeedScaler = 0.1
 playerState = 0
 
@@ -793,10 +793,28 @@ frame = 5
 [node name="Checkpoints" type="Node2D" parent="."]
 
 [node name="Checkpoint_00" parent="Checkpoints" instance=ExtResource("19_nhi4p")]
-position = Vector2(1028, -79)
+position = Vector2(1029, -96)
+
+[node name="Sprite2D" parent="Checkpoints/Checkpoint_00" index="0"]
+scale = Vector2(1, 3.76)
+
+[node name="CollisionShape2D" parent="Checkpoints/Checkpoint_00" index="1"]
+scale = Vector2(1, 3.76)
+
+[node name="CharacterSpawn" parent="Checkpoints/Checkpoint_00" index="2"]
+position = Vector2(-3, 21)
 
 [node name="Checkpoint_01" parent="Checkpoints" instance=ExtResource("19_nhi4p")]
 position = Vector2(1824, -17)
+
+[node name="Sprite2D" parent="Checkpoints/Checkpoint_01" index="0"]
+scale = Vector2(1.76, 3.96)
+
+[node name="CollisionShape2D" parent="Checkpoints/Checkpoint_01" index="1"]
+scale = Vector2(1.76, 3.96)
+
+[node name="CharacterSpawn" parent="Checkpoints/Checkpoint_01" index="2"]
+position = Vector2(0, 25)
 
 [editable path="Lights/LongHangingLamp_02"]
 [editable path="Lights/LongHangingLamp_03"]
@@ -814,3 +832,5 @@ position = Vector2(1824, -17)
 [editable path="Crates/Crate_01"]
 [editable path="Crates/Crate_02"]
 [editable path="Crates/Crate_04"]
+[editable path="Checkpoints/Checkpoint_00"]
+[editable path="Checkpoints/Checkpoint_01"]

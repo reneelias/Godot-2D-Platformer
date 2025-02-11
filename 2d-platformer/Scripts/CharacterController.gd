@@ -162,7 +162,7 @@ func _movement():
 	if playerState == PlayerState.WALL_HUG and velocity.y > 0:
 		velocity.y = min(velocity.y, wallHugSpeed)
 		
-	if Input.is_key_pressed(KEY_R):
+	if Input.is_action_just_pressed("Respawn"):
 		global_position = startPos
 		velocity = Vector2.ZERO
 
@@ -237,16 +237,16 @@ func death():
 	sprite2D.modulate = Color.WHITE
 	rotation = 0
 
-func checkpointEntered(checkpoint : Node2D):
+func checkpointEntered(checkpoint : Checkpoint):
 	if !currCheckpoint:
-		startPos = checkpoint.position
+		startPos = checkpoint.characterSpawn.global_position
 		currCheckpoint = checkpoint
 		return
 
 	var checkpointLastTwoChars = checkpoint.name.substr(checkpoint.name.length() - 2, 2)
 	var currCheckpointLastTwoChars = currCheckpoint.name.substr(currCheckpoint.name.length() - 2, 2)
 	if int(checkpointLastTwoChars) > int(currCheckpointLastTwoChars):
-		startPos = checkpoint.position
+		startPos = checkpoint.characterSpawn.global_position
 		currCheckpoint = checkpoint
 
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4vccwblyftcu"]
+[gd_scene load_steps=7 format=3 uid="uid://b4vccwblyftcu"]
 
 [ext_resource type="Script" uid="uid://ds57kl5uuvqee" path="res://Scripts/Checkpoint.gd" id="1_i51ak"]
+[ext_resource type="Texture2D" uid="uid://3s0xlldium38" path="res://Sprites/Character_SpriteSheet.png" id="2_1ali5"]
 
 [sub_resource type="Gradient" id="Gradient_avdlx"]
 offsets = PackedFloat32Array(0, 0.363636, 0.636364, 1)
@@ -14,9 +15,14 @@ gradient = SubResource("Gradient_avdlx")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_avdlx"]
 size = Vector2(59, 64)
 
-[node name="Checkpoint" type="Area2D" groups=["CheckPoints"]]
+[sub_resource type="AtlasTexture" id="AtlasTexture_72gxs"]
+atlas = ExtResource("2_1ali5")
+region = Rect2(0, 0, 24, 25)
+
+[node name="Checkpoint" type="Area2D" node_paths=PackedStringArray("characterSpawn") groups=["CheckPoints"]]
 priority = 10
 script = ExtResource("1_i51ak")
+characterSpawn = NodePath("CharacterSpawn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.915168, 0.475022, 0.700205, 0.678431)
@@ -25,5 +31,10 @@ texture = SubResource("GradientTexture2D_i51ak")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_avdlx")
+
+[node name="CharacterSpawn" type="Sprite2D" parent="."]
+modulate = Color(0.000113828, 0.000113828, 0.000113828, 1)
+self_modulate = Color(95.58, 100, 100, 1)
+texture = SubResource("AtlasTexture_72gxs")
 
 [connection signal="body_entered" from="." to="." method="onBodyEntered"]
