@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1h85t2dhdx2o"]
+
+[ext_resource type="Script" uid="uid://dh1pjun46rca" path="res://Scripts/SawBlade.gd" id="1_owqsm"]
+[ext_resource type="Texture2D" uid="uid://cnsetwf1calts" path="res://Sprites/SawBlade.png" id="1_q2gw3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q2gw3"]
+radius = 14.0357
+
+[node name="SawBlade" type="Area2D"]
+script = ExtResource("1_owqsm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_q2gw3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_q2gw3")
+
+[connection signal="body_entered" from="." to="." method="onBodyEntered"]
