@@ -13,4 +13,5 @@ sawBlade = ExtResource("2_bpp4f")
 
 [node name="VisibilitySprite" type="Sprite2D" parent="."]
 modulate = Color(0.882257, 0.477071, 0.901478, 1)
+z_index = 500
 texture = ExtResource("3_16nsp")
