@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqyanhnny324q"]
+
+[ext_resource type="Script" uid="uid://dwu12h7nq7jl7" path="res://Scripts/SawPathGroup.gd" id="1_8lxqs"]
+[ext_resource type="PackedScene" uid="uid://b1h85t2dhdx2o" path="res://ObjectScenes/SawBlade.tscn" id="2_bpp4f"]
+[ext_resource type="Texture2D" uid="uid://cnsetwf1calts" path="res://Sprites/SawBlade.png" id="3_16nsp"]
+
+[sub_resource type="Curve2D" id="Curve2D_0hmnq"]
+
+[node name="SawPathGroup" type="Path2D"]
+curve = SubResource("Curve2D_0hmnq")
+script = ExtResource("1_8lxqs")
+sawBlade = ExtResource("2_bpp4f")
+
+[node name="VisibilitySprite" type="Sprite2D" parent="."]
+modulate = Color(0.882257, 0.477071, 0.901478, 1)
+texture = ExtResource("3_16nsp")

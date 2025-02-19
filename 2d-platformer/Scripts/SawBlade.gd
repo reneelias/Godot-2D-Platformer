@@ -1,7 +1,9 @@
 extends Area2D
+class_name SawBlade
 
 @export_category("References")
 @export var pathFollow : PathFollow2D
+@export var sprite2D : Sprite2D
 
 @export_category("Settings")
 @export var spinSpeed := -15.0

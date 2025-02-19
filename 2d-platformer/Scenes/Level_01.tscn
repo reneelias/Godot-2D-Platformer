@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://c50oapyik8qtr"]
+[gd_scene load_steps=45 format=4 uid="uid://c50oapyik8qtr"]
 
 [ext_resource type="Texture2D" uid="uid://ds06l1jfhigal" path="res://Sprites/Tiles.png" id="1_e0dve"]
 [ext_resource type="PackedScene" uid="uid://da0ertkrhq327" path="res://ObjectScenes/Cam2D.tscn" id="1_mm5uc"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://c2wlrydy2amq1" path="res://ObjectScenes/Crate.tscn" id="18_nhi4p"]
 [ext_resource type="PackedScene" uid="uid://b4vccwblyftcu" path="res://ObjectScenes/CheckPoint.tscn" id="19_nhi4p"]
 [ext_resource type="PackedScene" uid="uid://b1h85t2dhdx2o" path="res://ObjectScenes/SawBlade.tscn" id="20_1uwm5"]
+[ext_resource type="PackedScene" uid="uid://bqyanhnny324q" path="res://ObjectScenes/SawPathGroup.tscn" id="22_yvmjr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2jryf"]
 texture = ExtResource("1_e0dve")
@@ -835,59 +836,22 @@ scale = Vector2(1.76, 3.96)
 [node name="CharacterSpawn" parent="Checkpoints/Checkpoint_01" index="2"]
 position = Vector2(0, 25)
 
-[node name="SawBladePath" type="Path2D" parent="."]
-position = Vector2(2065, 16)
-curve = SubResource("Curve2D_1uwm5")
-
-[node name="PathFollow2D_00" type="PathFollow2D" parent="SawBladePath"]
-position = Vector2(100, 0)
-rotation = 3.14159
-
-[node name="PathFollow2D_01" type="PathFollow2D" parent="SawBladePath"]
-position = Vector2(-16.0038, 0)
-rotation = 3.14159
-progress = 116.0
-
-[node name="PathFollow2D_02" type="PathFollow2D" parent="SawBladePath"]
-position = Vector2(-100, 32)
-rotation = 1.5708
-progress = 232.0
-
-[node name="PathFollow2D_03" type="PathFollow2D" parent="SawBladePath"]
-position = Vector2(16.0038, 32)
-progress = 348.0
-
 [node name="SawBlades" type="Node2D" parent="."]
 
 [node name="SawBlade_00" parent="SawBlades" node_paths=PackedStringArray("pathFollow") instance=ExtResource("20_1uwm5")]
-position = Vector2(1919, 15)
-pathFollow = NodePath("../../SawBladePath/PathFollow2D_00")
-spinSpeed = -5.0
-
-[node name="SawBlade_01" parent="SawBlades" node_paths=PackedStringArray("pathFollow") instance=ExtResource("20_1uwm5")]
-position = Vector2(1919, 15)
-pathFollow = NodePath("../../SawBladePath/PathFollow2D_01")
-spinSpeed = -5.0
-
-[node name="SawBlade_02" parent="SawBlades" node_paths=PackedStringArray("pathFollow") instance=ExtResource("20_1uwm5")]
-position = Vector2(1919, 15)
-pathFollow = NodePath("../../SawBladePath/PathFollow2D_02")
-spinSpeed = -5.0
-
-[node name="SawBlade_03" parent="SawBlades" node_paths=PackedStringArray("pathFollow") instance=ExtResource("20_1uwm5")]
-position = Vector2(1919, 15)
-pathFollow = NodePath("../../SawBladePath/PathFollow2D_03")
-spinSpeed = -5.0
-
-[node name="SawBlade_04" parent="SawBlades" node_paths=PackedStringArray("pathFollow") instance=ExtResource("20_1uwm5")]
 position = Vector2(2165, -37)
-pathFollow = NodePath("../../SawBladePath/PathFollow2D_03")
+pathFollow = NodePath("")
 spinSpeed = -5.0
 invertSpin = true
 followsPath = false
 
-[node name="Sprite2D" parent="SawBlades/SawBlade_04" index="0"]
+[node name="Sprite2D" parent="SawBlades/SawBlade_00" index="0"]
 flip_h = true
+
+[node name="SawPathGroup_00" parent="." instance=ExtResource("22_yvmjr")]
+position = Vector2(2065, 16)
+curve = SubResource("Curve2D_1uwm5")
+sawSpeed = 0.15
 
 [editable path="Lights/LongHangingLamp_02"]
 [editable path="Lights/LongHangingLamp_03"]
@@ -907,4 +871,4 @@ flip_h = true
 [editable path="Crates/Crate_04"]
 [editable path="Checkpoints/Checkpoint_00"]
 [editable path="Checkpoints/Checkpoint_01"]
-[editable path="SawBlades/SawBlade_04"]
+[editable path="SawBlades/SawBlade_00"]
