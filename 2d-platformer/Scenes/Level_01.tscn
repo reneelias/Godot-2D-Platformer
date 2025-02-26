@@ -1042,7 +1042,7 @@ scale = Vector2(1.76, 3.96)
 position = Vector2(0, 25)
 
 [node name="Checkpoint_02" parent="Checkpoints" instance=ExtResource("19_nhi4p")]
-position = Vector2(2513, -17)
+position = Vector2(2521, -17)
 
 [node name="Sprite2D" parent="Checkpoints/Checkpoint_02" index="0"]
 scale = Vector2(1.76, 3.96)
@@ -1051,7 +1051,7 @@ scale = Vector2(1.76, 3.96)
 scale = Vector2(1.76, 3.96)
 
 [node name="CharacterSpawn" parent="Checkpoints/Checkpoint_02" index="2"]
-position = Vector2(0, 25)
+position = Vector2(-5, 25)
 
 [node name="SawBlades" type="Node2D" parent="."]
 
