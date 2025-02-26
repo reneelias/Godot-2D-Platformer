@@ -6,6 +6,7 @@
 size = Vector2(16, 16)
 
 [node name="Crate" type="RigidBody2D"]
+collision_layer = 2
 freeze = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

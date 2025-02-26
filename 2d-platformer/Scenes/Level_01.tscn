@@ -603,7 +603,7 @@ point_count = 3
 
 [node name="Player" parent="." instance=ExtResource("5_egvei")]
 z_index = 5
-position = Vector2(-28, 8)
+position = Vector2(-29, 8)
 collision_mask = 3
 turnSpeedScaler = 0.1
 playerState = 0

@@ -59,6 +59,7 @@ _data = {
 [node name="Weight_Rigidbody" type="StaticBody2D" parent="."]
 z_index = 4
 position = Vector2(9, 0)
+collision_layer = 3
 
 [node name="Weight_Sprite" type="Sprite2D" parent="Weight_Rigidbody"]
 texture = SubResource("AtlasTexture_vet0u")

@@ -126,7 +126,7 @@ func _updatePlayerState():
 			setPlayerState(PlayerState.IDLE)
 	elif wallCollision and get_wall_normal().x == -inputVelocity.normalized().x and velocity.y > 0:
 		setPlayerState(PlayerState.WALL_HUG)
-	elif not is_on_floor() and velocity.y > wallHugSpeed - 1 and (playerState != PlayerState.WALL_HUG or (playerState == PlayerState.WALL_HUG and !is_on_wall())):
+	elif not is_on_floor() and velocity.y > wallHugSpeed - 1 and (playerState != PlayerState.WALL_HUG or (playerState == PlayerState.WALL_HUG and !wallCollision)):
 		setPlayerState(PlayerState.FALL)
 
 func _movement():
