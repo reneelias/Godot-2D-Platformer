@@ -490,7 +490,7 @@ texture = ExtResource("11_6vsk1")
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_tf658"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 2
 terrain_set_0/mode = 2
 terrain_set_0/terrain_0/name = "Lights"
 terrain_set_0/terrain_0/color = Color(0.7029, 0.700876, 0.453738, 1)
@@ -603,7 +603,8 @@ point_count = 3
 
 [node name="Player" parent="." instance=ExtResource("5_egvei")]
 z_index = 5
-position = Vector2(-29, 8)
+position = Vector2(-28, 8)
+collision_mask = 3
 turnSpeedScaler = 0.1
 playerState = 0
 

@@ -46,6 +46,7 @@ var inputVelocity := Vector2.ZERO
 @export var wallCoyoteFrames := 5
 @export var wallJumpAngle := 50.0
 var wallCoyoteFramesCount := 0
+var wallCollision := false;
 
 @export_category("Death")
 @export var deathTime := 1.0
@@ -85,6 +86,7 @@ var playerStateAnimDict : Dictionary = {
 	PlayerState.SLIDING: "Slide"
 }
 
+
 func _ready():
 	startPos = global_position
 	if playerState == PlayerState.HUNCHED_OVER:
@@ -122,7 +124,7 @@ func _updatePlayerState():
 			setPlayerState(PlayerState.RUN)
 		elif playerState != PlayerState.HUNCHED_OVER:
 			setPlayerState(PlayerState.IDLE)
-	elif is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x and velocity.y > 0:
+	elif wallCollision and get_wall_normal().x == -inputVelocity.normalized().x and velocity.y > 0:
 		setPlayerState(PlayerState.WALL_HUG)
 	elif not is_on_floor() and velocity.y > wallHugSpeed - 1 and (playerState != PlayerState.WALL_HUG or (playerState == PlayerState.WALL_HUG and !is_on_wall())):
 		setPlayerState(PlayerState.FALL)
@@ -173,7 +175,9 @@ func _updateJump():
 	elif coyoteFramesCount < coyoteFrames:
 		coyoteFramesCount += 1
 		
-	if (is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x) or playerState == PlayerState.WALL_HUG:
+	wallCollision = raycasts.wallCollision
+
+	if (wallCollision and raycasts.wallCollisionNormal.x == -inputVelocity.normalized().x) or playerState == PlayerState.WALL_HUG:
 		wallCoyoteFramesCount = 0
 	elif wallCoyoteFramesCount < wallCoyoteFrames:
 		wallCoyoteFramesCount += 1
@@ -185,7 +189,7 @@ func _updateJump():
 			velocity -= Vector2(0, jumpSpeed)
 			if playerState != PlayerState.CROUCHED:
 				setPlayerState(PlayerState.JUMP)
-		elif (is_on_wall() and get_wall_normal().x == -inputVelocity.normalized().x) or playerState == PlayerState.WALL_HUG or wallCoyoteFramesCount < wallCoyoteFrames:
+		elif (wallCollision and raycasts.wallCollisionNormal.x == -inputVelocity.normalized().x) or playerState == PlayerState.WALL_HUG or wallCoyoteFramesCount < wallCoyoteFrames:
 			jumpSpeedFramesCount = 0
 			jumpSpeedFrames = WALL_JUMP_FRAMES
 			var wallJumpVec = get_wall_normal()
@@ -200,6 +204,7 @@ func _updateJump():
 			setPlayerState(PlayerState.JUMP)
 		var jumpSpeedScalerMod := crouchJumpScaler if playerState == PlayerState.CROUCHED else 1.0
 		velocity -= Vector2(0, jumpSpeed * jumpSpeedScaler * jumpSpeedScalerMod * cos(float(jumpSpeedFramesCount)/jumpSpeedFrames * PI/2))
+
 
 func setPlayerState(state : PlayerState, animName : String = ""):
 	playerState = state
