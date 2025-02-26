@@ -663,25 +663,25 @@ collision_mask = 3
 [node name="WallRaycast_LeftTop" type="RayCast2D" parent="Raycasts"]
 z_index = 100
 position = Vector2(-2, -6)
-target_position = Vector2(-3, 0)
+target_position = Vector2(-4, 0)
 collision_mask = 2
 
 [node name="WallRaycast_LeftBottom" type="RayCast2D" parent="Raycasts"]
 z_index = 100
 position = Vector2(-2, 6)
-target_position = Vector2(-3, 0)
+target_position = Vector2(-4, 0)
 collision_mask = 2
 
 [node name="WallRaycast_RightTop" type="RayCast2D" parent="Raycasts"]
 z_index = 100
 position = Vector2(3, -6)
-target_position = Vector2(3, 0)
+target_position = Vector2(4, 0)
 collision_mask = 2
 
 [node name="WallRaycast_RightBottom" type="RayCast2D" parent="Raycasts"]
 z_index = 100
 position = Vector2(3, 6)
-target_position = Vector2(3, 0)
+target_position = Vector2(4, 0)
 collision_mask = 2
 
 [node name="SquishArea" type="Area2D" parent="."]
