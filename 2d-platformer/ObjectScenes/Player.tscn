@@ -658,6 +658,7 @@ script = ExtResource("6_1gky5")
 
 [node name="CrouchRaycast" type="RayCast2D" parent="Raycasts"]
 target_position = Vector2(0, -8)
+collision_mask = 3
 
 [node name="WallRaycast_LeftTop" type="RayCast2D" parent="Raycasts"]
 z_index = 100
