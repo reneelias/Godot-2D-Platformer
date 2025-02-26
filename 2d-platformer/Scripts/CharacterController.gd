@@ -89,7 +89,6 @@ func _ready():
 	startPos = global_position
 	if playerState == PlayerState.HUNCHED_OVER:
 		animPlayer.play("HunchedOver")
-	raycasts.horizontal_squish.connect(Callable(self, "horizontalSquish"))
 
 func _physics_process(delta):
 	match playerMode:
@@ -214,12 +213,6 @@ func squishBodyEntered(body):
 	if body.name != "Player":
 		print(body.name)
 		death()
-
-func horizontalSquish():
-	return
-	print("squish")
-	velocity = Vector2.ZERO
-	global_position = startPos
 
 func death():
 	if playerState == PlayerState.DEATH:
