@@ -3,9 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://biuvghtgdv7sj" path="res://ObjectScenes/Compactor.tscn" id="1_xjbt2"]
 
 [node name="Compactors" type="Node2D"]
+position = Vector2(-4, 46)
 
 [node name="Compactor_00" parent="." instance=ExtResource("1_xjbt2")]
-position = Vector2(1198, -30)
+position = Vector2(-55, -46)
 
 [node name="Hydraulics_Sprite" parent="Compactor_00" index="1"]
 modulate = Color(0.515688, 0.544407, 0.74931, 1)
@@ -14,7 +15,7 @@ modulate = Color(0.515688, 0.544407, 0.74931, 1)
 modulate = Color(0.515688, 0.544407, 0.74931, 1)
 
 [node name="Compactor_01" parent="." instance=ExtResource("1_xjbt2")]
-position = Vector2(1314, -30)
+position = Vector2(61, -46)
 rotation = 3.14159
 scale = Vector2(1, -1)
 
