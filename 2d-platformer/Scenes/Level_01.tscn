@@ -874,7 +874,7 @@ point_count = 3
 
 [node name="Player" parent="." instance=ExtResource("5_egvei")]
 z_index = 5
-position = Vector2(2776, 8)
+position = Vector2(-28, 8)
 collision_mask = 3
 turnSpeedScaler = 0.1
 playerState = 0
@@ -1254,7 +1254,7 @@ visibility_rect = Rect2(-500, -100, 1000, 200)
 draw_order = 0
 process_material = SubResource("ParticleProcessMaterial_cnu50")
 
-[node name="Compactors" parent="." instance=ExtResource("16_mm5uc")]
+[node name="CompactorGroup" parent="." instance=ExtResource("16_mm5uc")]
 position = Vector2(1574, 16)
 
 [node name="Forklifts" type="Node2D" parent="."]

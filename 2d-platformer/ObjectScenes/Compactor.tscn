@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://biuvghtgdv7sj"]
+[gd_scene load_steps=10 format=3 uid="uid://biuvghtgdv7sj"]
 
 [ext_resource type="Texture2D" uid="uid://v1eh883jwpk8" path="res://Sprites/Compactor.png" id="1_6w4xo"]
 
@@ -19,6 +19,7 @@ region = Rect2(5, 7, 32, 82)
 
 [sub_resource type="Animation" id="Animation_6w4xo"]
 resource_name = "Compact"
+length = 1.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -27,10 +28,10 @@ tracks/0/path = NodePath("Weight_Rigidbody:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.666667),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.9, 1.0666667, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(40, 0), Vector2(9, 0), Vector2(40, 0)]
+"values": [Vector2(40, 0), Vector2(9, 0), Vector2(9, 0), Vector2(40, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_vet0u"]
@@ -48,9 +49,26 @@ tracks/0/keys = {
 "values": [Vector2(9, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_i51a0"]
+resource_name = "Extended"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weight_Rigidbody:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(40, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i51a0"]
 _data = {
 &"Compact": SubResource("Animation_6w4xo"),
+&"Extended": SubResource("Animation_i51a0"),
 &"RESET": SubResource("Animation_vet0u")
 }
 
