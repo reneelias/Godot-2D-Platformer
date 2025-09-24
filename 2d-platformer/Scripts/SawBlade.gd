@@ -14,7 +14,7 @@ class_name SawBlade
 
 func _physics_process(delta):
 	rotate(spinSpeed * delta * (-1 if invertSpin else 1))
-	if followsPath:
+	if pathFollow and followsPath:
 		pathFollow.progress += delta * pathFollowSpeed
 		global_position = pathFollow.global_position
 
