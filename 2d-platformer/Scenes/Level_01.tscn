@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=4 uid="uid://c50oapyik8qtr"]
+[gd_scene load_steps=61 format=4 uid="uid://c50oapyik8qtr"]
 
 [ext_resource type="Texture2D" uid="uid://ds06l1jfhigal" path="res://Sprites/Tiles.png" id="1_e0dve"]
 [ext_resource type="PackedScene" uid="uid://da0ertkrhq327" path="res://ObjectScenes/Cam2D.tscn" id="1_mm5uc"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://33q4e7mjwf5e" path="res://ObjectScenes/CheckPoint.tscn" id="19_nhi4p"]
 [ext_resource type="PackedScene" uid="uid://b1h85t2dhdx2o" path="res://ObjectScenes/SawBlade.tscn" id="20_1uwm5"]
 [ext_resource type="PackedScene" uid="uid://bqyanhnny324q" path="res://ObjectScenes/SawPathGroup.tscn" id="22_yvmjr"]
+[ext_resource type="PackedScene" uid="uid://bmoktwhf4s4cv" path="res://ObjectScenes/KillArea.tscn" id="24_kw8b6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2jryf"]
 texture = ExtResource("1_e0dve")
@@ -1369,6 +1370,16 @@ sawSpeed = 0.3
 position = Vector2(2896, 0)
 spinSpeed = -5.0
 followsPath = false
+
+[node name="KillAreas" type="Node2D" parent="."]
+
+[node name="KillArea_00" parent="KillAreas" instance=ExtResource("24_kw8b6")]
+position = Vector2(2896, 141)
+scale = Vector2(1.62, 1.805)
+
+[node name="KillArea_01" parent="KillAreas" instance=ExtResource("24_kw8b6")]
+position = Vector2(2992, 141)
+scale = Vector2(1.62, 1.805)
 
 [editable path="Camera2D"]
 [editable path="Lights/LongHangingLamp_02"]
