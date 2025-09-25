@@ -9,6 +9,7 @@ radius = 14.0357
 [node name="SawBlade" type="Area2D" node_paths=PackedStringArray("sprite2D")]
 script = ExtResource("1_owqsm")
 sprite2D = NodePath("Sprite2D")
+gravityScale = 4.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_q2gw3")

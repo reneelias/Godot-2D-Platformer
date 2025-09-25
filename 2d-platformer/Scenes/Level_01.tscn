@@ -875,7 +875,7 @@ point_count = 3
 
 [node name="Player" parent="." instance=ExtResource("5_egvei")]
 z_index = 5
-position = Vector2(2849, 8)
+position = Vector2(2865, 7)
 collision_mask = 3
 turnSpeedScaler = 0.1
 playerState = 0
@@ -1337,11 +1337,15 @@ position = Vector2(-5, 25)
 position = Vector2(2896, -190)
 spinSpeed = -5.0
 followsPath = false
+usesGravity = true
+gravityScale = 4.0
 
 [node name="SawBlade_01" parent="SawBlades" instance=ExtResource("20_1uwm5")]
 position = Vector2(2976, -190)
 spinSpeed = -5.0
 followsPath = false
+usesGravity = true
+gravityScale = 4.0
 
 [node name="SawPathGroups" type="Node2D" parent="."]
 

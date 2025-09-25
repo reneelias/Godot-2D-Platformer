@@ -10,6 +10,9 @@ class_name SawBlade
 @export var invertSpin := false
 @export var followsPath := true
 @export var pathFollowSpeed := 70.0
+@export var usesGravity := false;
+@export var gravityScale := 9.81
+@export var velocity := Vector2.ZERO
 
 
 func _physics_process(delta):
@@ -17,6 +20,9 @@ func _physics_process(delta):
 	if pathFollow and followsPath:
 		pathFollow.progress += delta * pathFollowSpeed
 		global_position = pathFollow.global_position
+	if usesGravity:
+		velocity.y += gravityScale * delta
+		position += velocity
 
 func onBodyEntered(body: Node):
 	var player = body as CharacterController
