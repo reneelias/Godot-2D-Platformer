@@ -14,6 +14,7 @@ class_name CharacterController
 @export var frictionSpeedRetention := .25
 ## Ratio of speed when player is in the air compared to when on the ground
 @export var inAirSpeedScale := .5
+var inAirSpeedScale_og
 @export var jumpSpeedFrames := 10
 ## How much velocity scaled down by when turning
 @export var turnSpeedScaler := .5
@@ -45,6 +46,11 @@ var inputVelocity := Vector2.ZERO
 @export var wallHugSpeed := 100.0
 @export var wallCoyoteFrames := 5
 @export var wallJumpAngle := 50.0
+## Temporarily replaces the deafault inAirSpeedScale value immediately after jumping off of a wall
+@export var wallJumpInAirSpeedScale := 1.0
+## Amount of time wallJumpInAirSpeedScale will be applied
+@export var speedScaleDuration := .25
+var speedScaleCounter = 0
 var wallCoyoteFramesCount := 0
 var wallCollision := false;
 
@@ -89,6 +95,7 @@ var playerStateAnimDict : Dictionary = {
 
 func _ready():
 	startPos = global_position
+	inAirSpeedScale_og = inAirSpeedScale
 	if playerState == PlayerState.HUNCHED_OVER:
 		animPlayer.play("HunchedOver")
 
@@ -197,7 +204,9 @@ func _updateJump():
 			wallJumpVec.y = -abs(wallJumpVec.y)
 			velocity = wallJumpVec * wallJumpSpeed
 			wallCoyoteFramesCount = wallCoyoteFrames
+			setWallJumpInAirSpeed()
 			setPlayerState(PlayerState.JUMP, "" if get_wall_normal().x == -inputVelocity.normalized().x  else "WallJump")
+
 	elif Input.is_action_pressed("Jump") and (playerState == PlayerState.JUMP or playerState == PlayerState.CROUCHED) and jumpSpeedFramesCount < jumpSpeedFrames:
 		jumpSpeedFramesCount += 1
 		if playerState == PlayerState.CROUCHED and !Input.is_action_pressed("Down") and !raycasts.crouchRaycastCollision:
@@ -205,6 +214,14 @@ func _updateJump():
 		var jumpSpeedScalerMod := crouchJumpScaler if playerState == PlayerState.CROUCHED else 1.0
 		velocity -= Vector2(0, jumpSpeed * jumpSpeedScaler * jumpSpeedScalerMod * cos(float(jumpSpeedFramesCount)/jumpSpeedFrames * PI/2))
 
+func setWallJumpInAirSpeed():
+	inAirSpeedScale = wallJumpInAirSpeedScale
+	speedScaleCounter += 1
+	await get_tree().create_timer(speedScaleDuration).timeout
+	speedScaleCounter -= 1
+	if speedScaleCounter == 0:
+		inAirSpeedScale = inAirSpeedScale_og
+	
 
 func setPlayerState(state : PlayerState, animName : String = ""):
 	playerState = state

@@ -629,13 +629,14 @@ animPlayer = NodePath("AnimationPlayer")
 raycasts = NodePath("Raycasts")
 jumpSpeed = 80.0
 frictionSpeedRetention = 0.785
-inAirSpeedScale = 1.0
+inAirSpeedScale = 2.0
 jumpSpeedFrames = 13
 turnSpeedScaler = 0.375
 maxVelX = 100.0
 jumpSpeedScaler = 0.375
 wallJumpSpeed = 150.0
 wallCoyoteFrames = 10
+speedScaleDuration = 0.5
 deathTime = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
