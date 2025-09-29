@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=4 uid="uid://c50oapyik8qtr"]
+[gd_scene load_steps=62 format=4 uid="uid://c50oapyik8qtr"]
 
 [ext_resource type="Texture2D" uid="uid://ds06l1jfhigal" path="res://Sprites/Tiles.png" id="1_e0dve"]
 [ext_resource type="PackedScene" uid="uid://da0ertkrhq327" path="res://ObjectScenes/Cam2D.tscn" id="1_mm5uc"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://b1h85t2dhdx2o" path="res://ObjectScenes/SawBlade.tscn" id="20_1uwm5"]
 [ext_resource type="PackedScene" uid="uid://bqyanhnny324q" path="res://ObjectScenes/SawPathGroup.tscn" id="22_yvmjr"]
 [ext_resource type="PackedScene" uid="uid://bmoktwhf4s4cv" path="res://ObjectScenes/KillArea.tscn" id="24_kw8b6"]
+[ext_resource type="PackedScene" uid="uid://cftldogash6wh" path="res://ObjectScenes/ObjectSpawner.tscn" id="25_fonnl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2jryf"]
 texture = ExtResource("1_e0dve")
@@ -1334,18 +1335,20 @@ position = Vector2(-5, 25)
 [node name="SawBlades" type="Node2D" parent="."]
 
 [node name="SawBlade_00" parent="SawBlades" instance=ExtResource("20_1uwm5")]
+process_mode = 4
+visible = false
 position = Vector2(2896, -190)
 spinSpeed = -5.0
 followsPath = false
 usesGravity = true
-gravityScale = 4.0
 
 [node name="SawBlade_01" parent="SawBlades" instance=ExtResource("20_1uwm5")]
+process_mode = 4
+visible = false
 position = Vector2(2976, -190)
 spinSpeed = -5.0
 followsPath = false
 usesGravity = true
-gravityScale = 4.0
 
 [node name="SawPathGroups" type="Node2D" parent="."]
 
@@ -1377,6 +1380,25 @@ scale = Vector2(1.62, 1.805)
 [node name="KillArea_01" parent="KillAreas" instance=ExtResource("24_kw8b6")]
 position = Vector2(2976, 141)
 scale = Vector2(1.62, 1.805)
+
+[node name="Spawners" type="Node2D" parent="."]
+
+[node name="SawSpawner_00" parent="Spawners" node_paths=PackedStringArray("objectParent") instance=ExtResource("25_fonnl")]
+position = Vector2(2896, -257)
+objectScene = ExtResource("20_1uwm5")
+spawnInterval = 1.25
+objectParent = NodePath("../../SawBlades")
+objectType = 1
+sb_gravityScale = 3.0
+
+[node name="SawSpawner_01" parent="Spawners" node_paths=PackedStringArray("objectParent") instance=ExtResource("25_fonnl")]
+position = Vector2(2976, -257)
+objectScene = ExtResource("20_1uwm5")
+spawnInterval = 1.25
+spawnTimeOffset = 0.5
+objectParent = NodePath("../../SawBlades")
+objectType = 1
+sb_gravityScale = 3.0
 
 [editable path="Camera2D"]
 [editable path="Lights/LongHangingLamp_02"]
