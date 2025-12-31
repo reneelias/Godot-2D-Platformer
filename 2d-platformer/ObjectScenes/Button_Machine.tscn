@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cl8w5sxxdcv7g"]
+[gd_scene load_steps=8 format=3 uid="uid://cl8w5sxxdcv7g"]
 
 [ext_resource type="Texture2D" uid="uid://dp7gqou3uusm3" path="res://Sprites/InteractableObjects.png" id="1_0kh05"]
+[ext_resource type="Script" uid="uid://qfvjcost7d6i" path="res://Scripts/Button_Machine.gd" id="1_n2wu5"]
 
 [sub_resource type="Gradient" id="Gradient_gvqcw"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -12,9 +13,18 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.89316237, 0.18376069)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0kh05"]
-size = Vector2(4.98, 13)
+size = Vector2(16, 15)
 
-[node name="Button_Machine" type="Area2D"]
+[sub_resource type="SystemFont" id="SystemFont_0kh05"]
+
+[sub_resource type="Theme" id="Theme_n2wu5"]
+default_font = SubResource("SystemFont_0kh05")
+default_font_size = 0
+
+[node name="Button_Machine" type="Area2D" node_paths=PackedStringArray("text")]
+z_index = -10
+script = ExtResource("1_n2wu5")
+text = NodePath("RichTextLabel")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-0.5, 0)
@@ -24,9 +34,28 @@ hframes = 2
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -1.5)
 color = Color(0.4117647, 0.8235294, 0.43529412, 1)
+range_z_max = -9
 texture = SubResource("GradientTexture2D_n2wu5")
 texture_scale = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1.5)
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_0kh05")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -3.0
+offset_top = -14.0
+offset_right = 37.0
+offset_bottom = 32.0
+scale = Vector2(0.14, 0.14)
+theme = SubResource("Theme_n2wu5")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[wave amp=25.0 freq=3.0 connected=1]E[/wave]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
