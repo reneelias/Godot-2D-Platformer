@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=4 uid="uid://c50oapyik8qtr"]
+[gd_scene load_steps=63 format=4 uid="uid://c50oapyik8qtr"]
 
 [ext_resource type="Texture2D" uid="uid://ds06l1jfhigal" path="res://Sprites/Tiles.png" id="1_e0dve"]
 [ext_resource type="PackedScene" uid="uid://da0ertkrhq327" path="res://ObjectScenes/Cam2D.tscn" id="1_mm5uc"]
@@ -20,11 +20,12 @@
 [ext_resource type="PackedScene" uid="uid://ct476bf3ca1wm" path="res://ObjectScenes/CompactorGroup.tscn" id="16_mm5uc"]
 [ext_resource type="PackedScene" uid="uid://b8ubtijxmpikm" path="res://ObjectScenes/Forklift.tscn" id="17_ob0u7"]
 [ext_resource type="PackedScene" uid="uid://c2wlrydy2amq1" path="res://ObjectScenes/Crate.tscn" id="18_nhi4p"]
-[ext_resource type="PackedScene" uid="uid://33q4e7mjwf5e" path="res://ObjectScenes/CheckPoint.tscn" id="19_nhi4p"]
+[ext_resource type="PackedScene" uid="uid://33q4e7mjwf5e" path="res://ObjectScenes/Checkpoint.tscn" id="19_nhi4p"]
 [ext_resource type="PackedScene" uid="uid://b1h85t2dhdx2o" path="res://ObjectScenes/SawBlade.tscn" id="20_1uwm5"]
 [ext_resource type="PackedScene" uid="uid://bqyanhnny324q" path="res://ObjectScenes/SawPathGroup.tscn" id="22_yvmjr"]
 [ext_resource type="PackedScene" uid="uid://bmoktwhf4s4cv" path="res://ObjectScenes/KillArea.tscn" id="24_kw8b6"]
 [ext_resource type="PackedScene" uid="uid://cftldogash6wh" path="res://ObjectScenes/ObjectSpawner.tscn" id="25_fonnl"]
+[ext_resource type="PackedScene" uid="uid://cl8w5sxxdcv7g" path="res://ObjectScenes/Button_Machine.tscn" id="26_gvqcw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2jryf"]
 texture = ExtResource("1_e0dve")
@@ -876,7 +877,7 @@ point_count = 3
 
 [node name="Player" parent="." instance=ExtResource("5_egvei")]
 z_index = 5
-position = Vector2(-27, 8)
+position = Vector2(2787, 8)
 collision_mask = 3
 turnSpeedScaler = 0.1
 playerState = 0
@@ -884,6 +885,9 @@ playerState = 0
 [node name="Camera2D" parent="." node_paths=PackedStringArray("objectToFollow") instance=ExtResource("1_mm5uc")]
 limit_bottom = 100
 objectToFollow = NodePath("../Player")
+
+[node name="ChromaticAberration" parent="Camera2D" index="0"]
+anchors_preset = -1
 
 [node name="TileMapLayers" type="Node2D" parent="."]
 
@@ -1332,6 +1336,18 @@ scale = Vector2(1.76, 3.96)
 [node name="CharacterSpawn" parent="Checkpoints/Checkpoint_02" index="2"]
 position = Vector2(-5, 25)
 
+[node name="Checkpoint_03" parent="Checkpoints" instance=ExtResource("19_nhi4p")]
+position = Vector2(2788, -17)
+
+[node name="Sprite2D" parent="Checkpoints/Checkpoint_03" index="0"]
+scale = Vector2(1.76, 3.96)
+
+[node name="CollisionShape2D" parent="Checkpoints/Checkpoint_03" index="1"]
+scale = Vector2(1.76, 3.96)
+
+[node name="CharacterSpawn" parent="Checkpoints/Checkpoint_03" index="2"]
+position = Vector2(-1, 25)
+
 [node name="SawBlades" type="Node2D" parent="."]
 
 [node name="SawBlade_00" parent="SawBlades" instance=ExtResource("20_1uwm5")]
@@ -1389,7 +1405,7 @@ objectScene = ExtResource("20_1uwm5")
 spawnInterval = 1.25
 objectParent = NodePath("../../SawBlades")
 objectType = 1
-sb_gravityScale = 3.0
+sb_gravityScale = 2.0
 
 [node name="SawSpawner_01" parent="Spawners" node_paths=PackedStringArray("objectParent") instance=ExtResource("25_fonnl")]
 position = Vector2(2976, -257)
@@ -1398,7 +1414,12 @@ spawnInterval = 1.25
 spawnTimeOffset = 0.5
 objectParent = NodePath("../../SawBlades")
 objectType = 1
-sb_gravityScale = 3.0
+sb_gravityScale = 2.0
+
+[node name="Buttons" type="Node2D" parent="."]
+
+[node name="Button_Machine_00" parent="Buttons" instance=ExtResource("26_gvqcw")]
+position = Vector2(2864, -152)
 
 [editable path="Camera2D"]
 [editable path="Lights/LongHangingLamp_02"]
@@ -1423,3 +1444,4 @@ sb_gravityScale = 3.0
 [editable path="Checkpoints/Checkpoint_00"]
 [editable path="Checkpoints/Checkpoint_01"]
 [editable path="Checkpoints/Checkpoint_02"]
+[editable path="Checkpoints/Checkpoint_03"]

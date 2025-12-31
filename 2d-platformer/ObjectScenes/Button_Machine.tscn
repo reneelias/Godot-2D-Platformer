@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cl8w5sxxdcv7g"]
+
+[ext_resource type="Texture2D" uid="uid://dp7gqou3uusm3" path="res://Sprites/InteractableObjects.png" id="1_0kh05"]
+
+[sub_resource type="Gradient" id="Gradient_gvqcw"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n2wu5"]
+gradient = SubResource("Gradient_gvqcw")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.89316237, 0.18376069)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kh05"]
+size = Vector2(4.98, 13)
+
+[node name="Button_Machine" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.5, 0)
+texture = ExtResource("1_0kh05")
+hframes = 2
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -1.5)
+color = Color(0.4117647, 0.8235294, 0.43529412, 1)
+texture = SubResource("GradientTexture2D_n2wu5")
+texture_scale = 0.1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_0kh05")
