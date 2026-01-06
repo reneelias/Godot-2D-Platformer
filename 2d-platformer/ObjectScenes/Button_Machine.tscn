@@ -16,20 +16,27 @@ fill_to = Vector2(0.89316237, 0.18376069)
 size = Vector2(16, 15)
 
 [sub_resource type="SystemFont" id="SystemFont_0kh05"]
+subpixel_positioning = 0
 
 [sub_resource type="Theme" id="Theme_n2wu5"]
 default_font = SubResource("SystemFont_0kh05")
 default_font_size = 0
 
-[node name="Button_Machine" type="Area2D" node_paths=PackedStringArray("text")]
+[node name="Button_Machine" type="Area2D" node_paths=PackedStringArray("sprite", "text", "light")]
 z_index = -10
 script = ExtResource("1_n2wu5")
+sprite = NodePath("Sprite2D")
 text = NodePath("RichTextLabel")
+light = NodePath("PointLight2D")
+color_activated = Color(0.4117647, 0.8235294, 0.43529412, 1)
+color_deactivated = Color(0.85490197, 0.3647059, 0.3647059, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-0.5, 0)
 texture = ExtResource("1_0kh05")
 hframes = 2
+vframes = 3
+frame = 1
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -1.5)
