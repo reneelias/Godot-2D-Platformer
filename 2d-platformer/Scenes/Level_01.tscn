@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://njy68xhqkqki" path="res://Sprites/Textures.png" id="11_6vsk1"]
 [ext_resource type="Texture2D" uid="uid://usry87o25vx0" path="res://Sprites/WarehouseTiles.png" id="11_esi4a"]
 [ext_resource type="Texture2D" uid="uid://d362ldpb1x223" path="res://Sprites/NightSky_NoDither.png" id="13_cnu50"]
-[ext_resource type="PackedScene" uid="uid://dyglhcoiog4q0" path="res://ObjectScenes/Door_Machine.tscn" id="13_sgdom"]
+[ext_resource type="PackedScene" uid="uid://cb0xqm7m58vm8" path="res://ObjectScenes/Door_Machine.tscn" id="13_sgdom"]
 [ext_resource type="Texture2D" uid="uid://c0tcs55ux5og6" path="res://Sprites/Buildings_Far.png" id="14_cnu50"]
 [ext_resource type="PackedScene" uid="uid://ct476bf3ca1wm" path="res://ObjectScenes/CompactorGroup.tscn" id="16_mm5uc"]
 [ext_resource type="PackedScene" uid="uid://b8ubtijxmpikm" path="res://ObjectScenes/Forklift.tscn" id="17_ob0u7"]
@@ -878,7 +878,7 @@ point_count = 3
 
 [node name="Player" parent="." instance=ExtResource("5_egvei")]
 z_index = 5
-position = Vector2(0, 8)
+position = Vector2(3014, 8)
 collision_mask = 3
 turnSpeedScaler = 0.1
 playerState = 0
@@ -1425,7 +1425,8 @@ position = Vector2(2864, -152)
 [node name="Doors" type="Node2D" parent="."]
 
 [node name="Door_Machine" parent="Doors" instance=ExtResource("13_sgdom")]
-z_index = -15
+z_index = -5
+position = Vector2(3044, -1)
 
 [editable path="Camera2D"]
 [editable path="Lights/LongHangingLamp_02"]
