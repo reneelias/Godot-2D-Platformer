@@ -878,7 +878,7 @@ point_count = 3
 
 [node name="Player" parent="." instance=ExtResource("5_egvei")]
 z_index = 5
-position = Vector2(3014, 8)
+position = Vector2(-29, 8)
 collision_mask = 3
 turnSpeedScaler = 0.1
 playerState = 0
@@ -1419,12 +1419,13 @@ sb_gravityScale = 2.0
 
 [node name="Buttons" type="Node2D" parent="."]
 
-[node name="Button_Machine_00" parent="Buttons" instance=ExtResource("26_gvqcw")]
+[node name="Button_Machine_00" parent="Buttons" node_paths=PackedStringArray("connectedObj") instance=ExtResource("26_gvqcw")]
 position = Vector2(2864, -152)
+connectedObj = NodePath("../../Doors/Door_Machine_00")
 
 [node name="Doors" type="Node2D" parent="."]
 
-[node name="Door_Machine" parent="Doors" instance=ExtResource("13_sgdom")]
+[node name="Door_Machine_00" parent="Doors" instance=ExtResource("13_sgdom")]
 z_index = -5
 position = Vector2(3044, -1)
 
