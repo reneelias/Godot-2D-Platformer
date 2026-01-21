@@ -40,6 +40,8 @@ var inputVelocity := Vector2.ZERO
 @export var crouchSpeedScaler := .125
 ## The jump speed scaler for the player when crouching
 @export var crouchJumpScaler := .25
+## Absolute movement speed while crouch walking
+@export var crouchWalkSpeed := 20.0
 
 @export_subgroup("Wall Jumping")
 @export var wallJumpSpeed := 200.0
@@ -76,6 +78,7 @@ enum PlayerState {
 	FALL,
 	WALL_HUG,
 	CROUCHED,
+	CROUCH_WALKING,
 	SLIDING,
 	DEATH
 }
@@ -89,6 +92,7 @@ var playerStateAnimDict : Dictionary = {
 	PlayerState.FALL: "Fall",
 	PlayerState.WALL_HUG: "WallHug",
 	PlayerState.CROUCHED: "Crouch",
+	PlayerState.CROUCH_WALKING: "CrouchWalk",
 	PlayerState.SLIDING: "Slide"
 }
 
@@ -117,15 +121,18 @@ func _updatePlaying(delta):
 			_updatePlayerState()
 
 func _updatePlayerState():
-	if Input.is_action_pressed("Down") or ((playerState == PlayerState.CROUCHED or playerState == PlayerState.SLIDING) and raycasts.crouchRaycastCollision):
-		if abs(velocity.x) < crouchSpeedThreshold:
+	if Input.is_action_pressed("Down") or ((playerState == PlayerState.CROUCHED or playerState == PlayerState.SLIDING or playerState == PlayerState.CROUCH_WALKING) and raycasts.crouchRaycastCollision):
+		if abs(velocity.x) < crouchSpeedThreshold and Input.get_axis("MoveLeft", "MoveRight") == 0:
 			setPlayerState(PlayerState.CROUCHED)
 		else:
-			if playerState != PlayerState.SLIDING:
+			if Input.get_axis("MoveLeft", "MoveRight") != 0 and abs(velocity.x) < crouchSpeedThreshold:
+				if playerState != PlayerState.CROUCH_WALKING:
+					setPlayerState(PlayerState.CROUCH_WALKING)
+			elif playerState != PlayerState.SLIDING:
 				slideFrictionModMod = 1.0
+				setPlayerState(PlayerState.SLIDING)
 			else:
 				slideFrictionModMod += .0025
-			setPlayerState(PlayerState.SLIDING)
 	elif is_on_floor():
 		if inputVelocity.x != 0:
 			setPlayerState(PlayerState.RUN)
@@ -144,6 +151,9 @@ func _movement():
 	
 	if playerState != PlayerState.SLIDING:
 		inputVelocity += moveSpeedVec * Input.get_axis("MoveLeft", "MoveRight") * (inAirSpeedScale if (not is_on_floor()) else 1.0)
+	
+	if playerState == PlayerState.CROUCH_WALKING:
+		inputVelocity *= .125
 
 	if playerState == PlayerState.CROUCHED:
 		if !is_on_floor():
@@ -158,6 +168,8 @@ func _movement():
 		velocity.x = moveSpeed * Input.get_axis("MoveLeft", "MoveRight") * (inAirSpeedScale if (not is_on_floor()) else 1.0) * turnSpeedScaler
 	else:
 		velocity += inputVelocity
+		if playerState == PlayerState.CROUCH_WALKING:
+			velocity.x = inputVelocity.x * crouchWalkSpeed
 
 	if abs(velocity.x) > maxVelX:
 		velocity.x = maxVelX if velocity.x > 0 else -maxVelX
