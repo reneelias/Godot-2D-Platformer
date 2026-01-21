@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ccwmsb5ujo4ku"]
+[gd_scene load_steps=17 format=3 uid="uid://ccwmsb5ujo4ku"]
 
 [ext_resource type="Script" uid="uid://c71maiyhaww64" path="res://Scripts/CharacterController.gd" id="1_tryvm"]
 [ext_resource type="Texture2D" uid="uid://3s0xlldium38" path="res://Sprites/Character_SpriteSheet.png" id="3_akhjb"]
@@ -295,6 +295,9 @@ tracks/4/keys = {
 "values": [Vector2(0.5, 1.5), Vector2(0.5, 0.5)]
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpivi"]
+size = Vector2(4, 10)
+
 [sub_resource type="Animation" id="Animation_akhjb"]
 length = 0.001
 tracks/0/type = "value"
@@ -356,6 +359,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(4, 10)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SquishArea/CollisionShape2D:shape")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("RectangleShape2D_wpivi")]
 }
 
 [sub_resource type="Animation" id="Animation_5w4f7"]
@@ -605,9 +620,76 @@ tracks/4/keys = {
 "values": [Vector2(0.5, 0.5)]
 }
 
+[sub_resource type="Animation" id="Animation_u2kdk"]
+resource_name = "CrouchWalk"
+length = 0.80002004
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [32, 33, 34, 35]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionPolygon2D:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [PackedVector2Array(-3.5, 0, 4.5, 0, 4.5, 6.5, 3.5, 7.5, -2.5, 7.5, -3.5, 6.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("SquishArea/CollisionShape2D:shape")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("RectangleShape2D_wpivi")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SquishArea/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 4)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SquishArea/CollisionShape2D:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, 5)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wpivi"]
 _data = {
 &"Crouch": SubResource("Animation_7ig1s"),
+&"CrouchWalk": SubResource("Animation_u2kdk"),
 &"Fall": SubResource("Animation_1gky5"),
 &"HunchedOver": SubResource("Animation_6tuqy"),
 &"Idle": SubResource("Animation_5podq"),
@@ -618,9 +700,6 @@ _data = {
 &"WallHug": SubResource("Animation_bbkq1"),
 &"WallJump": SubResource("Animation_xb0pv")
 }
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpivi"]
-size = Vector2(4, 10)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite2D", "animPlayer", "raycasts") groups=["Player"]]
 script = ExtResource("1_tryvm")
