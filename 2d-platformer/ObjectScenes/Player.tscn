@@ -643,7 +643,7 @@ deathTime = 0.5
 texture = ExtResource("3_akhjb")
 offset = Vector2(0, -0.5)
 hframes = 4
-vframes = 8
+vframes = 9
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-3, -7.5, 4, -7.5, 4, 7, 3, 8, -2, 8, -3, 7)
