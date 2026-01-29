@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=4 uid="uid://c50oapyik8qtr"]
+[gd_scene load_steps=65 format=4 uid="uid://c50oapyik8qtr"]
 
 [ext_resource type="Texture2D" uid="uid://ds06l1jfhigal" path="res://Sprites/Tiles.png" id="1_e0dve"]
 [ext_resource type="PackedScene" uid="uid://da0ertkrhq327" path="res://ObjectScenes/Cam2D.tscn" id="1_mm5uc"]
@@ -21,12 +21,13 @@
 [ext_resource type="PackedScene" uid="uid://ct476bf3ca1wm" path="res://ObjectScenes/CompactorGroup.tscn" id="16_mm5uc"]
 [ext_resource type="PackedScene" uid="uid://b8ubtijxmpikm" path="res://ObjectScenes/Forklift.tscn" id="17_ob0u7"]
 [ext_resource type="PackedScene" uid="uid://c2wlrydy2amq1" path="res://ObjectScenes/Crate.tscn" id="18_nhi4p"]
-[ext_resource type="PackedScene" uid="uid://33q4e7mjwf5e" path="res://ObjectScenes/Checkpoint.tscn" id="19_nhi4p"]
+[ext_resource type="PackedScene" uid="uid://33q4e7mjwf5e" path="res://ObjectScenes/CheckPoint.tscn" id="19_nhi4p"]
 [ext_resource type="PackedScene" uid="uid://b1h85t2dhdx2o" path="res://ObjectScenes/SawBlade.tscn" id="20_1uwm5"]
 [ext_resource type="PackedScene" uid="uid://bqyanhnny324q" path="res://ObjectScenes/SawPathGroup.tscn" id="22_yvmjr"]
 [ext_resource type="PackedScene" uid="uid://bmoktwhf4s4cv" path="res://ObjectScenes/KillArea.tscn" id="24_kw8b6"]
 [ext_resource type="PackedScene" uid="uid://cftldogash6wh" path="res://ObjectScenes/ObjectSpawner.tscn" id="25_fonnl"]
 [ext_resource type="PackedScene" uid="uid://cl8w5sxxdcv7g" path="res://ObjectScenes/Button_Machine.tscn" id="26_gvqcw"]
+[ext_resource type="PackedScene" uid="uid://cg0d3r0rnwgut" path="res://ObjectScenes/Flag.tscn" id="28_f75tq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2jryf"]
 texture = ExtResource("1_e0dve")
@@ -1431,6 +1432,13 @@ connectedObj = NodePath("../../Doors/Door_Machine_00")
 [node name="Door_Machine_00" parent="Doors" instance=ExtResource("13_sgdom")]
 z_index = -5
 position = Vector2(3044, -1)
+
+[node name="Flag" parent="." instance=ExtResource("28_f75tq")]
+position = Vector2(3402, -328)
+
+[node name="Flag2" parent="." instance=ExtResource("28_f75tq")]
+z_index = 10
+position = Vector2(3420, -328)
 
 [editable path="Camera2D"]
 [editable path="Lights/LongHangingLamp_02"]
