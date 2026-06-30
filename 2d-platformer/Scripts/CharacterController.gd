@@ -96,12 +96,17 @@ var playerStateAnimDict : Dictionary = {
 	PlayerState.SLIDING: "Slide"
 }
 
+var isSprinting := false
+var sprintSpeed := 200.0
 
 func _ready():
 	startPos = global_position
 	inAirSpeedScale_og = inAirSpeedScale
 	if playerState == PlayerState.HUNCHED_OVER:
 		animPlayer.play("HunchedOver")
+
+func _process(delta):
+	_checkInput()
 
 func _physics_process(delta):
 	match playerMode:
@@ -171,8 +176,9 @@ func _movement():
 		if playerState == PlayerState.CROUCH_WALKING:
 			velocity.x = inputVelocity.x * crouchWalkSpeed
 
-	if abs(velocity.x) > maxVelX:
-		velocity.x = maxVelX if velocity.x > 0 else -maxVelX
+	var currMaxVel = sprintSpeed if isSprinting else maxVelX
+	if abs(velocity.x) > currMaxVel:
+		velocity.x = currMaxVel if velocity.x > 0 else -currMaxVel
 	
 	if inputVelocity.x != 0:
 		sprite2D.flip_h = inputVelocity.x < 0
@@ -280,3 +286,7 @@ func checkpointEntered(checkpoint : Checkpoint):
 func _updateDeath():
 	pass
 	# rotate(deg_to_rad(5))
+
+func _checkInput():
+	isSprinting = Input.is_action_pressed("Sprint")
+		
