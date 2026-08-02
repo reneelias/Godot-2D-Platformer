@@ -179,7 +179,8 @@ func _movement():
 	var currMaxVel = sprintSpeed if isSprinting else maxVelX
 	if abs(velocity.x) > currMaxVel:
 		velocity.x = currMaxVel if velocity.x > 0 else -currMaxVel
-	
+		animPlayer.speed_scale = abs(velocity.x)/maxVelX 
+		print("animPlayer.speed_scale: ", animPlayer.speed_scale)
 	if inputVelocity.x != 0:
 		sprite2D.flip_h = inputVelocity.x < 0
 
