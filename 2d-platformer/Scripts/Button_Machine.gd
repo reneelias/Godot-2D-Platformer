@@ -23,7 +23,7 @@ func _ready():
 		sprite.frame = 1
 
 func _process(delta):
-	if Input.is_action_just_pressed("Interact"):
+	if Input.is_action_just_pressed("Interact") and playerContact:
 		toggle()
 
 func toggle():
